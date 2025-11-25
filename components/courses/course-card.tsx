@@ -32,41 +32,44 @@ export function CourseCard({
 }: CourseCardProps) {
   return (
     <Link href={`/courses/${slug}`}>
-      <Card className="h-full overflow-hidden transition-all hover:shadow-lg border-border/50 bg-card/50 backdrop-blur-sm">
+      <Card className="group h-full overflow-hidden border-border/40 bg-card/40 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1">
         <div className="relative aspect-video w-full overflow-hidden">
           <Image
             src={image}
             alt={title}
             fill
-            className="object-cover transition-transform duration-300 hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <Badge className="absolute right-2 top-2 bg-background/80 text-foreground backdrop-blur-md hover:bg-background/90">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <Badge className="absolute right-3 top-3 bg-background/90 text-foreground backdrop-blur-md shadow-sm border-none">
             {category}
           </Badge>
         </div>
-        <CardHeader className="p-4">
-          <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-            <span className="flex items-center gap-1">
-              <Star className="h-4 w-4 fill-primary text-primary" />
-              {rating}
-            </span>
-            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-muted">
+        <CardHeader className="p-5">
+          <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
+            <div className="flex items-center gap-1.5 bg-secondary/50 px-2 py-1 rounded-md">
+              <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+              <span className="font-medium text-foreground">{rating}</span>
+            </div>
+            <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-muted text-muted-foreground border border-border/50">
               {level}
             </span>
           </div>
-          <h3 className="line-clamp-1 text-lg font-bold">{title}</h3>
-          <p className="line-clamp-2 text-sm text-muted-foreground mt-2">
+          <h3 className="line-clamp-1 text-lg font-bold tracking-tight group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          <p className="line-clamp-2 text-sm text-muted-foreground mt-2 leading-relaxed">
             {description}
           </p>
         </CardHeader>
-        <CardFooter className="p-4 pt-0 flex items-center justify-between text-sm text-muted-foreground">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1">
-              <BookOpen className="h-4 w-4" />
+        <CardFooter className="p-5 pt-0 flex items-center justify-between">
+          <div className="flex items-center gap-4 text-xs text-muted-foreground font-medium">
+            <span className="flex items-center gap-1.5">
+              <BookOpen className="h-3.5 w-3.5" />
               {lessonsCount} Leçons
             </span>
-            <span className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
               {duration}
             </span>
           </div>
