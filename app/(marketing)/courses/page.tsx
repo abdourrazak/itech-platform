@@ -33,7 +33,7 @@ const allCourses = [
     id: 2,
     title: "DevOps : De zéro à héros",
     description: "Apprenez Docker, Kubernetes, CI/CD et l'infrastructure as code.",
-    image: "https://images.unsplash.com/photo-1667372393119-c8f473886484?q=80&w=3270&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=3288&auto=format&fit=crop",
     level: "Avancé",
     category: "DevOps",
     price: 89,
