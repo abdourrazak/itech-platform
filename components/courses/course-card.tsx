@@ -74,7 +74,9 @@ export function CourseCard({
             </span>
           </div>
           <div className="text-lg font-bold text-primary">
-            {price === 0 ? "Gratuit" : `${price}€`}
+            <Badge variant="secondary" className="text-primary bg-primary/10 hover:bg-primary/20 border-0">
+              Accès Libre
+            </Badge>
           </div>
         </CardFooter>
       </Card>
