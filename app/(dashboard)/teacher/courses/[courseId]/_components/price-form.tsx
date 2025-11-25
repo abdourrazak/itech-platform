@@ -26,8 +26,10 @@ interface PriceFormProps {
 };
 
 const formSchema = z.object({
-  price: z.coerce.number(),
+  price: z.number().min(0).optional(),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 export const PriceForm = ({
   initialData,
@@ -38,16 +40,16 @@ export const PriceForm = ({
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      price: initialData.price || undefined
+      price: initialData.price ?? undefined
     },
   });
 
   const { isSubmitting, isValid } = form.formState;
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: FormValues) => {
     try {
       console.log(values);
       setIsEditing(false);
@@ -95,6 +97,8 @@ export const PriceForm = ({
                       disabled={isSubmitting}
                       placeholder="Fixer un prix pour votre cours"
                       {...field}
+                      onChange={(e) => field.onChange(e.target.value ? parseFloat(e.target.value) : undefined)}
+                      value={field.value ?? ''}
                     />
                   </FormControl>
                   <FormMessage />

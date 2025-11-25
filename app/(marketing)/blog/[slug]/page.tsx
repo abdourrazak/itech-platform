@@ -11,16 +11,16 @@ const blogPosts: Record<string, any> = {
         title: "Les nouveautés de Next.js 15",
         excerpt: "Découvrez les server actions, le nouveau caching et plus encore.",
         content: `
-      <p class="mb-4">Next.js 15 apporte des changements majeurs à l'écosystème React. Avec une stabilité accrue pour l'App Router et des améliorations de performance significatives, c'est le moment idéal pour mettre à jour vos applications.</p>
+      <p className="mb-4">Next.js 15 apporte des changements majeurs à l'écosystème React. Avec une stabilité accrue pour l'App Router et des améliorations de performance significatives, c'est le moment idéal pour mettre à jour vos applications.</p>
       
-      <h2 class="text-2xl font-bold mt-8 mb-4">Server Actions stables</h2>
-      <p class="mb-4">Les Server Actions sont désormais stables et prêts pour la production. Ils permettent d'exécuter du code serveur directement depuis vos composants, simplifiant grandement la gestion des formulaires et des mutations de données.</p>
+      <h2 className="text-2xl font-bold mt-8 mb-4">Server Actions stables</h2>
+      <p className="mb-4">Les Server Actions sont désormais stables et prêts pour la production. Ils permettent d'exécuter du code serveur directement depuis vos composants, simplifiant grandement la gestion des formulaires et des mutations de données.</p>
       
-      <h2 class="text-2xl font-bold mt-8 mb-4">Caching amélioré</h2>
-      <p class="mb-4">Le système de cache a été revu pour être plus intuitif. Par défaut, le fetch est désormais plus prévisible, et les options de revalidation sont plus granulaires.</p>
+      <h2 className="text-2xl font-bold mt-8 mb-4">Caching amélioré</h2>
+      <p className="mb-4">Le système de cache a été revu pour être plus intuitif. Par défaut, le fetch est désormais plus prévisible, et les options de revalidation sont plus granulaires.</p>
 
-      <h2 class="text-2xl font-bold mt-8 mb-4">Support partiel du Prerendering (PPR)</h2>
-      <p class="mb-4">Le Partial Prerendering est une fonctionnalité expérimentale qui promet de combiner le meilleur du statique et du dynamique. Une partie de la page est pré-rendue, tandis que les composants dynamiques sont streamés.</p>
+      <h2 className="text-2xl font-bold mt-8 mb-4">Support partiel du Prerendering (PPR)</h2>
+      <p className="mb-4">Le Partial Prerendering est une fonctionnalité expérimentale qui promet de combiner le meilleur du statique et du dynamique. Une partie de la page est pré-rendue, tandis que les composants dynamiques sont streamés.</p>
     `,
         date: "24 Nov 2025",
         category: "Tech",
@@ -32,13 +32,13 @@ const blogPosts: Record<string, any> = {
         title: "Pourquoi apprendre TypeScript en 2025 ?",
         excerpt: "TypeScript est devenu incontournable. Voici pourquoi vous ne pouvez plus l'ignorer.",
         content: `
-      <p class="mb-4">JavaScript est le langage du web, mais TypeScript est le langage des applications web robustes. En 2025, ne pas connaître TypeScript est un véritable handicap sur le marché du travail.</p>
+      <p className="mb-4">JavaScript est le langage du web, mais TypeScript est le langage des applications web robustes. En 2025, ne pas connaître TypeScript est un véritable handicap sur le marché du travail.</p>
       
-      <h2 class="text-2xl font-bold mt-8 mb-4">Sécurité du typage</h2>
-      <p class="mb-4">Le principal avantage est évidemment le typage statique. Il permet d'attraper les erreurs à la compilation plutôt qu'à l'exécution, sauvant des heures de débogage.</p>
+      <h2 className="text-2xl font-bold mt-8 mb-4">Sécurité du typage</h2>
+      <p className="mb-4">Le principal avantage est évidemment le typage statique. Il permet d'attraper les erreurs à la compilation plutôt qu'à l'exécution, sauvant des heures de débogage.</p>
       
-      <h2 class="text-2xl font-bold mt-8 mb-4">Meilleure expérience développeur</h2>
-      <p class="mb-4">L'autocomplétion et l'intelliSense offerts par TypeScript dans VS Code sont incomparables. Vous savez exactement quelles propriétés sont disponibles sur vos objets.</p>
+      <h2 className="text-2xl font-bold mt-8 mb-4">Meilleure expérience développeur</h2>
+      <p className="mb-4">L'autocomplétion et l'intelliSense offerts par TypeScript dans VS Code sont incomparables. Vous savez exactement quelles propriétés sont disponibles sur vos objets.</p>
     `,
         date: "20 Nov 2025",
         category: "Carrière",
