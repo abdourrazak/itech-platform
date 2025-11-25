@@ -55,7 +55,7 @@ export default function LoginPage() {
                             S'inscrire
                         </Link>
                     </div>
-                    <Link href="/forgot-password" class="underline hover:text-primary">
+                    <Link href="/forgot-password" className="underline hover:text-primary">
                         Mot de passe oublié ?
                     </Link>
                 </CardFooter>
