@@ -1,3 +1,5 @@
+"use client"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -5,32 +7,43 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { User, LogOut, Settings, LayoutDashboard } from "lucide-react"
 import Link from "next/link"
-import { useAuth } from "@/components/auth-provider"
+import { signOut } from "next-auth/react"
 
-export function UserNav() {
-    const { user, logout } = useAuth()
+interface UserNavProps {
+    user: {
+        name?: string | null
+        email?: string | null
+        image?: string | null
+    }
+}
 
-    if (!user) return null
+export function UserNav({ user }: UserNavProps) {
+    const handleSignOut = () => {
+        signOut({ callbackUrl: "/" })
+    }
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center overflow-hidden border border-input hover:bg-accent transition-colors">
-                        <User className="h-5 w-5 text-muted-foreground" />
+                        {user.image ? (
+                            <img src={user.image} alt={user.name || "User"} className="h-full w-full object-cover" />
+                        ) : (
+                            <User className="h-5 w-5 text-muted-foreground" />
+                        )}
                     </div>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">Mon Compte</p>
+                        <p className="text-sm font-medium leading-none">{user.name || "Mon Compte"}</p>
                         <p className="text-xs leading-none text-muted-foreground">
                             {user.email}
                         </p>
@@ -52,7 +65,10 @@ export function UserNav() {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600 cursor-pointer focus:text-red-600" onClick={logout}>
+                <DropdownMenuItem
+                    className="text-red-600 cursor-pointer focus:text-red-600"
+                    onClick={handleSignOut}
+                >
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Se déconnecter</span>
                 </DropdownMenuItem>

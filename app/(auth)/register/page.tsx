@@ -6,27 +6,39 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { Github, Mail } from "lucide-react"
-import { useState } from "react"
-import { useAuth } from "@/components/auth-provider"
+import { useState, useTransition } from "react"
+import { register } from "@/actions/auth"
+import { useRouter } from "next/navigation"
 
 export default function RegisterPage() {
-    const { login } = useAuth()
+    const router = useRouter()
+    const [isPending, startTransition] = useTransition()
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState("")
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        setIsLoading(true)
-
-        // Simuler un délai réseau
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        setError("")
 
         const fullName = `${firstName} ${lastName}`.trim()
-        login(email, fullName || "Utilisateur")
-        setIsLoading(false)
+
+        startTransition(async () => {
+            const result = await register({
+                name: fullName || "Utilisateur",
+                email,
+                password
+            })
+
+            if (result?.error) {
+                setError(result.error)
+            } else {
+                router.push("/dashboard")
+                router.refresh()
+            }
+        })
     }
 
     return (
@@ -40,6 +52,12 @@ export default function RegisterPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <form onSubmit={handleSubmit} className="space-y-4">
+                        {error && (
+                            <div className="p-3 text-sm text-red-600 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-md">
+                                {error}
+                            </div>
+                        )}
+
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="first-name">Prénom</Label>
@@ -49,6 +67,7 @@ export default function RegisterPage() {
                                     required
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
+                                    disabled={isPending}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -59,6 +78,7 @@ export default function RegisterPage() {
                                     required
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
+                                    disabled={isPending}
                                 />
                             </div>
                         </div>
@@ -71,6 +91,7 @@ export default function RegisterPage() {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                disabled={isPending}
                             />
                         </div>
                         <div className="space-y-2">
@@ -79,12 +100,17 @@ export default function RegisterPage() {
                                 id="password"
                                 type="password"
                                 required
+                                minLength={6}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                disabled={isPending}
                             />
+                            <p className="text-xs text-muted-foreground">
+                                Au moins 6 caractères
+                            </p>
                         </div>
-                        <Button className="w-full" type="submit" disabled={isLoading}>
-                            {isLoading ? "Inscription..." : "S'inscrire"}
+                        <Button className="w-full" type="submit" disabled={isPending}>
+                            {isPending ? "Inscription..." : "S'inscrire"}
                         </Button>
                     </form>
 
@@ -99,11 +125,11 @@ export default function RegisterPage() {
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                        <Button variant="outline" type="button">
+                        <Button variant="outline" type="button" disabled={isPending}>
                             <Github className="mr-2 h-4 w-4" />
                             Github
                         </Button>
-                        <Button variant="outline" type="button">
+                        <Button variant="outline" type="button" disabled={isPending}>
                             <Mail className="mr-2 h-4 w-4" />
                             Google
                         </Button>

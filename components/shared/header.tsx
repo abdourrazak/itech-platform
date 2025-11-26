@@ -5,13 +5,12 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Activity } from "lucide-react"
 import { cn } from "@/lib/utils"
-
 import { UserNav } from "@/components/shared/user-nav"
-import { useAuth } from "@/components/auth-provider"
+import { useSession } from "next-auth/react"
 
 export function Header() {
-  const { user } = useAuth()
-  const isLoggedIn = !!user
+  const { data: session, status } = useSession()
+  const isLoggedIn = !!session?.user
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -49,8 +48,10 @@ export function Header() {
             {/* Search placeholder */}
           </div>
           <nav className="flex items-center gap-2">
-            {isLoggedIn ? (
-              <UserNav />
+            {status === "loading" ? (
+              <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />
+            ) : isLoggedIn ? (
+              <UserNav user={session.user} />
             ) : (
               <>
                 <Link href="/login" className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}>
