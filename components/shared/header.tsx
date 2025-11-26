@@ -10,7 +10,6 @@ import { useSession } from "next-auth/react"
 
 export function Header() {
   const { data: session, status } = useSession()
-  const isLoggedIn = !!session?.user
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -48,20 +47,21 @@ export function Header() {
             {/* Search placeholder */}
           </div>
           <nav className="flex items-center gap-2">
+            {/* Boutons Connexion et Inscription - toujours visibles */}
+            <Link href="/login" className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}>
+              Se connecter
+            </Link>
+            <Link href="/register" className={cn(buttonVariants({ size: "sm" }))}>
+              S'inscrire
+            </Link>
+
+            {/* Profil utilisateur - visible si connecté */}
             {status === "loading" ? (
               <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />
-            ) : isLoggedIn ? (
+            ) : session?.user ? (
               <UserNav user={session.user} />
-            ) : (
-              <>
-                <Link href="/login" className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}>
-                  Se connecter
-                </Link>
-                <Link href="/register" className={cn(buttonVariants({ size: "sm" }))}>
-                  S'inscrire
-                </Link>
-              </>
-            )}
+            ) : null}
+
             <ModeToggle />
           </nav>
         </div>
