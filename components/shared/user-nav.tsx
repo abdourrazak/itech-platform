@@ -11,8 +11,13 @@ import {
 import { Button } from "@/components/ui/button"
 import { User, LogOut, Settings, LayoutDashboard } from "lucide-react"
 import Link from "next/link"
+import { useAuth } from "@/components/auth-provider"
 
 export function UserNav() {
+    const { user, logout } = useAuth()
+
+    if (!user) return null
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -27,7 +32,7 @@ export function UserNav() {
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">Mon Compte</p>
                         <p className="text-xs leading-none text-muted-foreground">
-                            user@example.com
+                            {user.email}
                         </p>
                     </div>
                 </DropdownMenuLabel>
@@ -47,7 +52,7 @@ export function UserNav() {
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-red-600 cursor-pointer focus:text-red-600">
+                <DropdownMenuItem className="text-red-600 cursor-pointer focus:text-red-600" onClick={logout}>
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Se déconnecter</span>
                 </DropdownMenuItem>

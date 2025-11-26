@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -5,10 +7,11 @@ import { Activity } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 import { UserNav } from "@/components/shared/user-nav"
+import { useAuth } from "@/components/auth-provider"
 
 export function Header() {
-  // TODO: Replace with real auth check
-  const isLoggedIn = true
+  const { user } = useAuth()
+  const isLoggedIn = !!user
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
