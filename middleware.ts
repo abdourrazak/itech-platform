@@ -8,7 +8,7 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth
 
   const isApiAuthRoute = nextUrl.pathname.startsWith("/api/auth")
-  const isPublicRoute = nextUrl.pathname === "/" || nextUrl.pathname.startsWith("/courses") || nextUrl.pathname.startsWith("/blog") || nextUrl.pathname.startsWith("/paths")
+  const isPublicRoute = nextUrl.pathname === "/" || nextUrl.pathname.startsWith("/courses") || nextUrl.pathname.startsWith("/blog") || nextUrl.pathname.startsWith("/paths") || nextUrl.pathname.startsWith("/categories")
   const isAuthRoute = nextUrl.pathname.startsWith("/login") || nextUrl.pathname.startsWith("/register")
 
   if (isApiAuthRoute) {

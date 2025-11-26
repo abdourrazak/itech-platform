@@ -2,11 +2,12 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle2, PlayCircle, Star, User, Clock, BookOpen, Share2, FileText, HelpCircle, GraduationCap } from "lucide-react"
 import { use } from "react"
+import { cn } from "@/lib/utils"
 
 interface CoursePageProps {
   params: Promise<{
@@ -147,11 +148,12 @@ export default function CoursePage({ params }: CoursePageProps) {
                   </div>
 
                   <div className="space-y-3">
-                    <Button className="w-full h-12 text-base font-bold shadow-md bg-primary hover:bg-primary/90" asChild>
-                      <Link href="/register">
-                        S'inscrire gratuitement
-                      </Link>
-                    </Button>
+                    <Link
+                      href="/register"
+                      className={cn(buttonVariants({ size: "default" }), "w-full h-12 text-base font-bold shadow-md bg-primary hover:bg-primary/90")}
+                    >
+                      S'inscrire gratuitement
+                    </Link>
                     <p className="text-xs text-center text-muted-foreground">
                       Accès immédiat après inscription
                     </p>
@@ -199,9 +201,12 @@ export default function CoursePage({ params }: CoursePageProps) {
               <span className="text-3xl font-bold text-primary">Gratuit</span>
               <Badge variant="outline">Accès libre</Badge>
             </div>
-            <Button className="w-full h-12 text-base font-bold" asChild>
-              <Link href="/register">S'inscrire gratuitement</Link>
-            </Button>
+            <Link
+              href="/register"
+              className={cn(buttonVariants({ size: "default" }), "w-full h-12 text-base font-bold")}
+            >
+              S'inscrire gratuitement
+            </Link>
           </div>
 
           {/* Méthodologie */}

@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Activity } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export function Header() {
   return (
@@ -40,12 +41,12 @@ export function Header() {
             {/* Search placeholder */}
           </div>
           <nav className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/login">Se connecter</Link>
-            </Button>
-            <Button size="sm" asChild>
-              <Link href="/register">S'inscrire</Link>
-            </Button>
+            <Link href="/login" className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}>
+              Se connecter
+            </Link>
+            <Link href="/register" className={cn(buttonVariants({ size: "sm" }))}>
+              S'inscrire
+            </Link>
             <ModeToggle />
           </nav>
         </div>
