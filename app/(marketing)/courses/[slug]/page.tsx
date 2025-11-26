@@ -147,11 +147,11 @@ export default function CoursePage({ params }: CoursePageProps) {
                   </div>
 
                   <div className="space-y-3">
-                    <Link href="/register">
-                      <Button className="w-full h-12 text-base font-bold shadow-md bg-primary hover:bg-primary/90">
-                        S'inscire gratuitement
-                      </Button>
-                    </Link>
+                    <Button className="w-full h-12 text-base font-bold shadow-md bg-primary hover:bg-primary/90" asChild>
+                      <Link href="/register">
+                        S'inscrire gratuitement
+                      </Link>
+                    </Button>
                     <p className="text-xs text-center text-muted-foreground">
                       Accès immédiat après inscription
                     </p>
@@ -199,9 +199,9 @@ export default function CoursePage({ params }: CoursePageProps) {
               <span className="text-3xl font-bold text-primary">Gratuit</span>
               <Badge variant="outline">Accès libre</Badge>
             </div>
-            <Link href="/register">
-              <Button className="w-full h-12 text-base font-bold">S'inscrire gratuitement</Button>
-            </Link>
+            <Button className="w-full h-12 text-base font-bold" asChild>
+              <Link href="/register">S'inscrire gratuitement</Link>
+            </Button>
           </div>
 
           {/* Méthodologie */}

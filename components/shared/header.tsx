@@ -40,12 +40,12 @@ export function Header() {
             {/* Search placeholder */}
           </div>
           <nav className="flex items-center gap-2">
-            <Link href="/login">
-                <Button variant="ghost" size="sm">Se connecter</Button>
-            </Link>
-            <Link href="/register">
-                <Button size="sm">S'inscrire</Button>
-            </Link>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/login">Se connecter</Link>
+            </Button>
+            <Button size="sm" asChild>
+              <Link href="/register">S'inscrire</Link>
+            </Button>
             <ModeToggle />
           </nav>
         </div>
