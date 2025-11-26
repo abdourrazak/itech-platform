@@ -89,7 +89,12 @@ export default function CoursePage({ params }: CoursePageProps) {
             <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
               <Link href="/courses" className="hover:text-primary transition-colors">Formations</Link>
               <span>/</span>
-              <span className="text-foreground">{course.category}</span>
+              <Link
+                href={`/categories/${course.category.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')}`}
+                className="text-foreground hover:text-primary transition-colors hover:underline underline-offset-4"
+              >
+                {course.category}
+              </Link>
             </div>
 
             <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -142,9 +147,9 @@ export default function CoursePage({ params }: CoursePageProps) {
                   </div>
 
                   <div className="space-y-3">
-                    <Link href="/login">
+                    <Link href="/register">
                       <Button className="w-full h-12 text-base font-bold shadow-md bg-primary hover:bg-primary/90">
-                        S'inscrire gratuitement
+                        S'inscire gratuitement
                       </Button>
                     </Link>
                     <p className="text-xs text-center text-muted-foreground">
@@ -194,7 +199,7 @@ export default function CoursePage({ params }: CoursePageProps) {
               <span className="text-3xl font-bold text-primary">Gratuit</span>
               <Badge variant="outline">Accès libre</Badge>
             </div>
-            <Link href="/login">
+            <Link href="/register">
               <Button className="w-full h-12 text-base font-bold">S'inscrire gratuitement</Button>
             </Link>
           </div>
