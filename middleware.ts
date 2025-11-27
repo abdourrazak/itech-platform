@@ -8,25 +8,42 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth
 
   const isApiAuthRoute = nextUrl.pathname.startsWith("/api/auth")
-  const isPublicRoute = nextUrl.pathname === "/" || nextUrl.pathname.startsWith("/courses") || nextUrl.pathname.startsWith("/blog") || nextUrl.pathname.startsWith("/paths") || nextUrl.pathname.startsWith("/categories")
-  const isAuthRoute = nextUrl.pathname.startsWith("/login") || nextUrl.pathname.startsWith("/register")
+  const isPublicRoute = nextUrl.pathname === "/" ||
+    nextUrl.pathname.startsWith("/courses") ||
+    nextUrl.pathname.startsWith("/blog") ||
+    nextUrl.pathname.startsWith("/paths") ||
+    nextUrl.pathname.startsWith("/categories")
+  const isAuthRoute = nextUrl.pathname.startsWith("/login") ||
+    nextUrl.pathname.startsWith("/register")
 
+  // Ne jamais bloquer les routes API auth
   if (isApiAuthRoute) {
-    return undefined; // On ne bloque pas les routes API auth
+    return undefined
   }
 
+  // Si l'utilisateur est connecté et essaie d'accéder à login/register
+  // Le rediriger vers le dashboard
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL("/dashboard", nextUrl))
     }
-    return undefined;
+    // Sinon, laisser accéder aux pages login/register
+    return undefined
   }
 
+  // Si l'utilisateur n'est PAS connecté et essaie d'accéder à une route protégée
+  // Le rediriger vers login
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL("/login", nextUrl))
+    let callbackUrl = nextUrl.pathname
+    if (nextUrl.search) {
+      callbackUrl += nextUrl.search
+    }
+
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl)
+    return Response.redirect(new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl))
   }
 
-  return undefined;
+  return undefined
 })
 
 export const config = {
