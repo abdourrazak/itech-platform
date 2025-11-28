@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import Link from "next/link"
 
 import { courses as allCourses } from "@/lib/mock-data"
 
@@ -45,11 +46,25 @@ export default function CoursesPage() {
   return (
     <div className="container mx-auto px-6 md:px-12 py-16 md:py-24">
       {/* Header centré */}
-      <div className="flex flex-col items-center text-center space-y-4 mb-12">
+      <div className="flex flex-col items-center text-center space-y-4 mb-8">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Catalogue des formations</h1>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
           Découvrez nos cours et progressez à votre rythme. Des formations de qualité pour tous les niveaux.
         </p>
+      </div>
+
+      {/* Liens rapides vers les catégories */}
+      <div className="flex flex-wrap gap-3 justify-center mb-12">
+        {categories.filter(c => c !== "Tous").map((cat) => (
+          <Link
+            key={cat}
+            href={`/categories/${cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')}`}
+          >
+            <Badge variant="secondary" className="hover:bg-primary hover:text-primary-foreground cursor-pointer transition-colors px-4 py-2 text-sm font-medium rounded-full">
+              {cat}
+            </Badge>
+          </Link>
+        ))}
       </div>
 
       {/* Barre de recherche et filtres */}
