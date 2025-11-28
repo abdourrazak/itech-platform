@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle2, PlayCircle, Star, User, Clock, BookOpen, Share2, FileText, HelpCircle, GraduationCap } from "lucide-react"
 import { use } from "react"
 import { cn } from "@/lib/utils"
+import { courses } from "@/lib/mock-data"
+import { notFound } from "next/navigation"
 
 interface CoursePageProps {
   params: Promise<{
@@ -19,57 +21,10 @@ export default function CoursePage({ params }: CoursePageProps) {
   // Unwrap params
   const { slug } = use(params)
 
-  // Données factices (simulant un fetch basé sur le slug)
-  const course = {
-    title: "Maîtriser Next.js 15 & React 19",
-    description: "Le guide complet pour créer des applications web modernes avec les dernières technologies. Apprenez l'App Router, les Server Components, Server Actions et plus encore.",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=3270&auto=format&fit=crop",
-    level: "Intermédiaire",
-    category: "Développement Web",
-    price: 0, // Gratuit
-    rating: 4.8,
-    reviewsCount: 128,
-    lastUpdated: "Novembre 2025",
-    language: "Français",
-    instructor: {
-      name: "Jean Dupont",
-      role: "Senior Fullstack Dev",
-      image: "https://github.com/shadcn.png", // Placeholder
-      bio: "Développeur depuis 10 ans, passionné par l'écosystème React et l'enseignement."
-    },
-    objectives: [
-      "Comprendre l'architecture App Router de Next.js 15",
-      "Maîtriser les Server Components et Client Components",
-      "Gérer les données avec Prisma et Server Actions",
-      "Sécuriser son application avec NextAuth / Better Auth",
-      "Déployer sur Vercel avec une base de données Neon"
-    ],
-    curriculum: [
-      {
-        title: "Partie 1 : Introduction & Fondamentaux",
-        lessons: [
-          { title: "Bienvenue dans le cours", type: "video", duration: "05:00" },
-          { title: "Configuration de l'environnement", type: "text", duration: "10 min" },
-          { title: "Quiz : Les bases de Next.js", type: "quiz", duration: "5 questions" }
-        ]
-      },
-      {
-        title: "Partie 2 : App Router en profondeur",
-        lessons: [
-          { title: "Layouts et Templates", type: "video", duration: "15:00" },
-          { title: "Navigation et Link", type: "text", duration: "12 min" },
-          { title: "Quiz : Routing", type: "quiz", duration: "8 questions" }
-        ]
-      },
-      {
-        title: "Partie 3 : Data Fetching",
-        lessons: [
-          { title: "Server Components vs Client Components", type: "video", duration: "20:00" },
-          { title: "Server Actions", type: "text", duration: "15 min" },
-          { title: "Projet fil rouge : Blog", type: "video", duration: "25:00" }
-        ]
-      }
-    ]
+  const course = courses.find((c) => c.slug === slug)
+
+  if (!course) {
+    notFound()
   }
 
   const getIconForType = (type: string) => {
