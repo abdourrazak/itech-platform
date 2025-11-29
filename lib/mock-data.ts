@@ -335,7 +335,7 @@ export const courses: Course[] = [
         id: 7,
         title: "Cybersécurité : Les fondamentaux",
         description: "Apprenez à sécuriser vos applications, comprendre les attaques courantes et détecter les vulnérabilités.",
-        image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=3270&auto=format&fit=crop",
         level: "Intermédiaire",
         category: "Cybersécurité",
         price: 0,
