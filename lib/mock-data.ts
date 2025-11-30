@@ -1256,7 +1256,7 @@ kubectl scale deployment nginx-deployment --replicas=5
         price: 0,
         rating: 4.7,
         reviewsCount: 210,
-        lessonsCount: 24,
+        lessonsCount: 13,
         duration: "8h",
         slug: "intro-ia-ml",
         lastUpdated: "Septembre 2024",
@@ -1271,25 +1271,441 @@ kubectl scale deployment nginx-deployment --replicas=5
             {
                 title: "Fondamentaux de l'IA",
                 lessons: [
-                    { title: "Qu'est-ce que l'IA ?", duration: "08:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Histoire et évolution", duration: "10:00", type: "text", content: "# Histoire de l'IA\n\nL'IA a commencé dans les années 50..." },
-                    { title: "Quiz : Concepts de base", duration: "05:00", type: "quiz", questions: [{ question: "Qui est le père de l'IA ?", options: ["Alan Turing", "Steve Jobs", "Bill Gates"], correctAnswer: 0 }] }
+                    {
+                        title: "Qu'est-ce que l'Intelligence Artificielle ?",
+                        duration: "15:30",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/ad79nYk2keg"
+                    },
+                    {
+                        title: "Histoire et évolution de l'IA",
+                        duration: "18:20",
+                        type: "text",
+                        content: `# Histoire de l'Intelligence Artificielle
+
+## Les débuts (1950-1970)
+
+### 1950 : Le Test de Turing
+**Alan Turing** propose le test de Turing pour déterminer si une machine peut penser.
+
+### 1956 : Naissance officielle
+Conférence de Dartmouth où le terme "Intelligence Artificielle" est créé par **John McCarthy**.
+
+### 1960s : Les premiers succès
+- **ELIZA** (1966) : Premier chatbot
+- **Shakey** : Premier robot mobile intelligent
+
+## L'hiver de l'IA (1970-1980)
+
+Période de désillusion due à :
+- Limitations computationnelles
+- Promesses non tenues
+- Réduction des financements
+
+## Renaissance (1980-2000)
+
+### Systèmes experts
+- Utilisation dans l'industrie
+- MYCIN pour le diagnostic médical
+
+### Réseaux de neurones
+- Backpropagation (1986)
+- Deep Blue bat Kasparov aux échecs (1997)
+
+## L'ère moderne (2000-aujourd'hui)
+
+### 2012 : Deep Learning
+AlexNet remporte ImageNet avec les réseaux de neurones profonds
+
+### 2016 : AlphaGo
+Bat le champion du monde de Go
+
+### 2020s : IA générative
+- GPT-3, GPT-4
+- DALL-E, Midjourney
+- ChatGPT révolutionne l'interaction homme-machine
+
+## Types d'IA
+
+### IA Faible (Narrow AI)
+Spécialisée dans une tâche spécifique
+- Reconnaissance faciale
+- Recommandations Netflix
+- Assistants vocaux
+
+### IA Forte (AGI)
+Intelligence générale comparable à l'humain
+- Encore théorique
+- Objectif à long terme
+
+### Super IA
+Dépasse l'intelligence humaine
+- Hypothétique
+- Débats éthiques importants
+
+## Applications actuelles
+
+1. **Vision par ordinateur** : Reconnaissance d'images, voitures autonomes
+2. **NLP** : Traduction, chatbots, analyse de sentiment
+3. **Recommandation** : Netflix, Spotify, Amazon
+4. **Santé** : Diagnostic médical, découverte de médicaments
+5. **Finance** : Trading algorithmique, détection de fraude`
+                    },
+                    {
+                        title: "Types d'apprentissage automatique",
+                        duration: "12:45",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/ukzFI9rgwfU"
+                    },
+                    {
+                        title: "Quiz : Fondamentaux de l'IA",
+                        duration: "08:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Qui est considéré comme le père de l'IA ?",
+                                options: ["Alan Turing", "Steve Jobs", "Bill Gates", "Mark Zuckerberg"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "En quelle année le terme 'Intelligence Artificielle' a-t-il été créé ?",
+                                options: ["1950", "1956", "1960", "1970"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Qu'est-ce qu'une IA faible (Narrow AI) ?",
+                                options: ["Une IA peu performante", "Une IA spécialisée dans une tâche", "Une IA générale", "Une IA obsolète"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel système a battu le champion du monde de Go ?",
+                                options: ["Deep Blue", "Watson", "AlphaGo", "ChatGPT"],
+                                correctAnswer: 2
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 title: "Machine Learning Pratique",
                 lessons: [
-                    { title: "Apprentissage supervisé vs non-supervisé", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Votre premier modèle avec Scikit-Learn", duration: "20:00", type: "text", content: "# Scikit-Learn\n\nUne librairie puissante pour le ML..." },
-                    { title: "Validation du modèle", duration: "10:00", type: "quiz", questions: [{ question: "Quelle métrique pour la classification ?", options: ["Accuracy", "MSE", "R2"], correctAnswer: 0 }] }
+                    {
+                        title: "Introduction au Machine Learning",
+                        duration: "16:20",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/ukzFI9rgwfU"
+                    },
+                    {
+                        title: "Python pour le ML : NumPy et Pandas",
+                        duration: "25:30",
+                        type: "text",
+                        content: `# Python pour le Machine Learning
+
+## NumPy : Calcul numérique
+
+### Installation
+\`\`\`bash
+pip install numpy pandas scikit-learn matplotlib
+\`\`\`
+
+### Arrays NumPy
+\`\`\`python
+import numpy as np
+
+# Créer un array
+arr = np.array([1, 2, 3, 4, 5])
+print(arr)  # [1 2 3 4 5]
+
+# Array 2D
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+print(matrix.shape)  # (2, 3)
+
+# Opérations vectorisées
+arr * 2  # [2 4 6 8 10]
+arr + 10  # [11 12 13 14 15]
+
+# Fonctions mathématiques
+np.mean(arr)  # 3.0
+np.std(arr)   # 1.41
+np.max(arr)   # 5
+\`\`\`
+
+## Pandas : Manipulation de données
+
+### DataFrames
+\`\`\`python
+import pandas as pd
+
+# Créer un DataFrame
+data = {
+    'nom': ['Alice', 'Bob', 'Charlie'],
+    'age': [25, 30, 35],
+    'ville': ['Paris', 'Lyon', 'Marseille']
+}
+df = pd.DataFrame(data)
+
+# Afficher les premières lignes
+print(df.head())
+
+# Statistiques descriptives
+print(df.describe())
+
+# Filtrer les données
+adultes = df[df['age'] > 28]
+
+# Grouper et agréger
+df.groupby('ville')['age'].mean()
+\`\`\`
+
+### Lecture de fichiers
+\`\`\`python
+# CSV
+df = pd.read_csv('data.csv')
+
+# Excel
+df = pd.read_excel('data.xlsx')
+
+# JSON
+df = pd.read_json('data.json')
+\`\`\`
+
+### Nettoyage des données
+\`\`\`python
+# Gérer les valeurs manquantes
+df.dropna()  # Supprimer les lignes avec NaN
+df.fillna(0)  # Remplacer NaN par 0
+
+# Supprimer les doublons
+df.drop_duplicates()
+
+# Renommer les colonnes
+df.rename(columns={'old_name': 'new_name'})
+\`\`\`
+
+## Visualisation avec Matplotlib
+
+\`\`\`python
+import matplotlib.pyplot as plt
+
+# Graphique linéaire
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Mon graphique')
+plt.show()
+
+# Histogramme
+plt.hist(df['age'], bins=10)
+plt.show()
+
+# Scatter plot
+plt.scatter(df['age'], df['salaire'])
+plt.show()
+\`\`\``
+                    },
+                    {
+                        title: "Votre premier modèle avec Scikit-Learn",
+                        duration: "22:15",
+                        type: "text",
+                        content: `# Premier modèle de Machine Learning
+
+## Régression Linéaire
+
+### Problème
+Prédire le prix d'une maison en fonction de sa surface.
+
+### Code complet
+\`\`\`python
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+
+# 1. Préparer les données
+data = {
+    'surface': [50, 60, 70, 80, 90, 100, 110, 120],
+    'prix': [150000, 180000, 210000, 240000, 270000, 300000, 330000, 360000]
+}
+df = pd.DataFrame(data)
+
+# 2. Séparer features (X) et target (y)
+X = df[['surface']]
+y = df['prix']
+
+# 3. Split train/test (80/20)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 4. Créer et entraîner le modèle
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# 5. Faire des prédictions
+y_pred = model.predict(X_test)
+
+# 6. Évaluer le modèle
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"MSE: {mse}")
+print(f"R²: {r2}")
+print(f"Coefficient: {model.coef_[0]}")
+print(f"Intercept: {model.intercept_}")
+
+# 7. Visualiser
+plt.scatter(X, y, color='blue', label='Données réelles')
+plt.plot(X, model.predict(X), color='red', label='Régression')
+plt.xlabel('Surface (m²)')
+plt.ylabel('Prix (€)')
+plt.legend()
+plt.show()
+
+# 8. Prédire pour une nouvelle maison
+nouvelle_maison = [[95]]
+prix_predit = model.predict(nouvelle_maison)
+print(f"Prix prédit pour 95m²: {prix_predit[0]:,.0f}€")
+\`\`\`
+
+## Classification : Iris Dataset
+
+\`\`\`python
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+# Charger les données
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Modèle
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+
+# Prédictions
+y_pred = clf.predict(X_test)
+
+# Évaluation
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2%}")
+print(classification_report(y_test, y_pred))
+\`\`\``
+                    },
+                    {
+                        title: "Évaluation et validation des modèles",
+                        duration: "18:40",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Kdsp6soqA7o"
+                    },
+                    {
+                        title: "Quiz : Machine Learning",
+                        duration: "10:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle bibliothèque Python est utilisée pour le calcul numérique ?",
+                                options: ["Pandas", "NumPy", "Matplotlib", "Scikit-learn"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Que signifie MSE ?",
+                                options: ["Mean Square Error", "Maximum Standard Error", "Model Selection Error", "Mean System Evaluation"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle métrique est utilisée pour la classification ?",
+                                options: ["MSE", "R²", "Accuracy", "RMSE"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "À quoi sert train_test_split ?",
+                                options: ["Nettoyer les données", "Séparer données d'entraînement et de test", "Créer le modèle", "Visualiser les résultats"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel algorithme est utilisé pour la régression linéaire ?",
+                                options: ["DecisionTree", "LinearRegression", "KMeans", "SVM"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    }
                 ]
             },
             {
-                title: "Conclusion & Certificat",
+                title: "Projet Final & Certification",
                 lessons: [
-                    { title: "L'éthique dans l'IA", duration: "12:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Examen final IA", duration: "20:00", type: "quiz", questions: [{ question: "Le biais est-il un problème ?", options: ["Oui", "Non"], correctAnswer: 0 }] },
-                    { title: "Certificat de réussite", duration: "01:00", type: "text", content: "CERTIFICAT" }
+                    {
+                        title: "Projet : Prédiction de prix immobiliers",
+                        duration: "35:20",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Wqmtf9SA_kk"
+                    },
+                    {
+                        title: "Introduction aux réseaux de neurones",
+                        duration: "20:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/aircAruvnKk"
+                    },
+                    {
+                        title: "Examen final IA & ML",
+                        duration: "25:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Qui a proposé le Test de Turing ?",
+                                options: ["Alan Turing", "John McCarthy", "Marvin Minsky", "Geoffrey Hinton"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle est la différence entre IA faible et IA forte ?",
+                                options: ["La puissance de calcul", "Spécialisée vs générale", "Ancienne vs moderne", "Gratuite vs payante"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Que fait la fonction fit() en Scikit-learn ?",
+                                options: ["Teste le modèle", "Entraîne le modèle", "Visualise les données", "Nettoie les données"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle bibliothèque est utilisée pour la manipulation de données tabulaires ?",
+                                options: ["NumPy", "Pandas", "Matplotlib", "TensorFlow"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Que mesure le score R² ?",
+                                options: ["L'erreur absolue", "La qualité de la régression", "Le temps d'exécution", "La taille du dataset"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel type d'apprentissage utilise des données étiquetées ?",
+                                options: ["Non supervisé", "Supervisé", "Par renforcement", "Semi-supervisé"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "AlphaGo a battu le champion du monde de quel jeu ?",
+                                options: ["Échecs", "Go", "Poker", "Dames"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle fonction pandas lit un fichier CSV ?",
+                                options: ["read_csv()", "load_csv()", "import_csv()", "open_csv()"],
+                                correctAnswer: 0
+                            }
+                        ]
+                    },
+                    {
+                        title: "Certificat de réussite",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
