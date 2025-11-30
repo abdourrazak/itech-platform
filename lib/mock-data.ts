@@ -60,7 +60,7 @@ export const courses: Course[] = [
         price: 0,
         rating: 4.8,
         reviewsCount: 124,
-        lessonsCount: 42,
+        lessonsCount: 18,
         duration: "12h",
         slug: "nextjs-15-react-19",
         lastUpdated: "Novembre 2024",
@@ -76,49 +76,235 @@ export const courses: Course[] = [
                 title: "Introduction à Next.js 15",
                 lessons: [
                     {
-                        title: "Pourquoi Next.js ?",
-                        duration: "10:00",
+                        title: "Pourquoi choisir Next.js en 2024 ?",
+                        duration: "12:30",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" // Exemple placeholder
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
                     },
                     {
-                        title: "Installation et configuration",
-                        duration: "15:00",
+                        title: "Installation et configuration complète",
+                        duration: "18:45",
                         type: "text",
-                        content: `
-# Installation de Next.js 15
+                        content: `# Installation de Next.js 15
 
-Pour commencer un nouveau projet Next.js, ouvrez votre terminal et exécutez la commande suivante :
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé :
+- **Node.js** version 18.17 ou supérieure
+- **npm** ou **yarn** comme gestionnaire de paquets
+- Un éditeur de code (VS Code recommandé)
+
+## Création d'un nouveau projet
+
+Pour créer un nouveau projet Next.js 15, ouvrez votre terminal et exécutez :
 
 \`\`\`bash
-npx create-next-app@latest
+npx create-next-app@latest mon-projet-nextjs
 \`\`\`
 
-Lors de l'installation, vous verrez les invites suivantes :
+### Options de configuration
 
-- **What is your project named?** my-app
-- **Would you like to use TypeScript?** Yes
-- **Would you like to use ESLint?** Yes
-- **Would you like to use Tailwind CSS?** Yes
-- **Would you like to use \`src/\` directory?** No
-- **Would you like to use App Router?** Yes
-- **Would you like to customize the default import alias?** No
+Lors de l'installation, vous serez invité à répondre aux questions suivantes :
 
-Une fois l'installation terminée, naviguez dans le dossier de votre projet :
+1. **What is your project named?** \`mon-projet-nextjs\`
+2. **Would you like to use TypeScript?** ✅ **Yes** (fortement recommandé)
+3. **Would you like to use ESLint?** ✅ **Yes**
+4. **Would you like to use Tailwind CSS?** ✅ **Yes**
+5. **Would you like to use \`src/\` directory?** ⬜ **No** (optionnel)
+6. **Would you like to use App Router?** ✅ **Yes** (nouvelle architecture)
+7. **Would you like to customize the default import alias?** ⬜ **No**
+
+## Structure du projet créé
+
+Après l'installation, votre projet aura la structure suivante :
+
+\`\`\`
+mon-projet-nextjs/
+├── app/
+│   ├── layout.tsx       # Layout racine
+│   ├── page.tsx         # Page d'accueil
+│   └── globals.css      # Styles globaux
+├── public/              # Fichiers statiques
+├── node_modules/        # Dépendances
+├── package.json         # Configuration npm
+├── tsconfig.json        # Configuration TypeScript
+├── next.config.ts       # Configuration Next.js
+└── tailwind.config.ts   # Configuration Tailwind
+\`\`\`
+
+## Lancement du serveur de développement
+
+Naviguez dans le dossier de votre projet et démarrez le serveur :
 
 \`\`\`bash
-cd my-app
+cd mon-projet-nextjs
 npm run dev
 \`\`\`
 
-Votre application est maintenant accessible sur [http://localhost:3000](http://localhost:3000).
-                        `
+Votre application est maintenant accessible sur **http://localhost:3000** 🎉
+
+## Configuration de VS Code
+
+Pour une meilleure expérience de développement, installez les extensions suivantes :
+
+- **ES7+ React/Redux/React-Native snippets**
+- **Tailwind CSS IntelliSense**
+- **Prettier - Code formatter**
+- **ESLint**
+
+### Configuration recommandée (.vscode/settings.json)
+
+\`\`\`json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+\`\`\`
+
+## Commandes utiles
+
+- \`npm run dev\` - Démarre le serveur de développement
+- \`npm run build\` - Crée une version de production
+- \`npm run start\` - Démarre le serveur de production
+- \`npm run lint\` - Vérifie le code avec ESLint
+
+## Prochaines étapes
+
+Maintenant que votre environnement est configuré, nous allons explorer :
+- L'architecture App Router
+- Le système de routing basé sur les fichiers
+- Les Server Components et Client Components
+- La gestion des données avec Server Actions`
                     },
                     {
-                        title: "Structure du projet",
-                        duration: "08:00",
+                        title: "Architecture App Router vs Pages Router",
+                        duration: "15:20",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                        videoUrl: "https://www.youtube.com/embed/gSSsZReIFRk"
+                    },
+                    {
+                        title: "Structure des dossiers et conventions de nommage",
+                        duration: "22:15",
+                        type: "text",
+                        content: `# Structure des dossiers dans Next.js 15
+
+## Le dossier \`app/\`
+
+Next.js 15 utilise le **App Router**, une nouvelle approche basée sur le dossier \`app/\`. Chaque dossier représente un segment de route.
+
+### Fichiers spéciaux
+
+Next.js utilise des conventions de nommage pour des fichiers spéciaux :
+
+| Fichier | Description | Requis |
+|---------|-------------|--------|
+| \`layout.tsx\` | UI partagée pour un segment et ses enfants | ✅ Oui (racine) |
+| \`page.tsx\` | Interface unique d'une route | ✅ Oui |
+| \`loading.tsx\` | UI de chargement pour un segment | ⬜ Non |
+| \`error.tsx\` | UI d'erreur pour un segment | ⬜ Non |
+| \`not-found.tsx\` | UI pour les erreurs 404 | ⬜ Non |
+| \`route.ts\` | Endpoint API | ⬜ Non |
+
+### Exemple de structure
+
+\`\`\`
+app/
+├── layout.tsx          # Layout racine (obligatoire)
+├── page.tsx            # Page d'accueil (/)
+├── about/
+│   └── page.tsx        # Page À propos (/about)
+├── blog/
+│   ├── layout.tsx      # Layout pour toutes les pages blog
+│   ├── page.tsx        # Liste des articles (/blog)
+│   └── [slug]/
+│       └── page.tsx    # Article individuel (/blog/mon-article)
+└── api/
+    └── users/
+        └── route.ts    # API endpoint (/api/users)
+\`\`\`
+
+## Routes dynamiques
+
+Utilisez les crochets \`[]\` pour créer des routes dynamiques :
+
+\`\`\`typescript
+// app/blog/[slug]/page.tsx
+export default function BlogPost({ params }: { params: { slug: string } }) {
+  return <h1>Article : {params.slug}</h1>
+}
+\`\`\`
+
+## Route Groups
+
+Organisez vos routes sans affecter l'URL en utilisant des parenthèses \`()\` :
+
+\`\`\`
+app/
+├── (marketing)/
+│   ├── about/
+│   │   └── page.tsx    # /about
+│   └── contact/
+│       └── page.tsx    # /contact
+└── (dashboard)/
+    ├── settings/
+    │   └── page.tsx    # /settings
+    └── profile/
+        └── page.tsx    # /profile
+\`\`\`
+
+## Dossier \`public/\`
+
+Contient les fichiers statiques accessibles depuis la racine :
+
+\`\`\`
+public/
+├── images/
+│   └── logo.png        # Accessible via /images/logo.png
+├── favicon.ico
+└── robots.txt
+\`\`\`
+
+## Bonnes pratiques
+
+1. **Colocation** : Placez les composants, styles et tests à côté des pages qui les utilisent
+2. **Nommage** : Utilisez kebab-case pour les dossiers de routes
+3. **Organisation** : Groupez les routes par fonctionnalité avec les Route Groups
+4. **Séparation** : Gardez la logique métier dans des dossiers séparés (\`lib/\`, \`utils/\`)`
+                    },
+                    {
+                        title: "Quiz : Fondamentaux Next.js",
+                        duration: "10:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quel est le fichier obligatoire à la racine du dossier app/ ?",
+                                options: ["page.tsx", "layout.tsx", "index.tsx", "app.tsx"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment créer une route dynamique dans Next.js 15 ?",
+                                options: ["Utiliser :param dans le nom", "Utiliser [param] dans le nom du dossier", "Utiliser {param} dans le nom", "Utiliser <param> dans le nom"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "À quoi servent les Route Groups (dossiers entre parenthèses) ?",
+                                options: ["Créer des routes privées", "Organiser sans affecter l'URL", "Créer des routes dynamiques", "Définir des middlewares"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle version minimale de Node.js est requise pour Next.js 15 ?",
+                                options: ["16.x", "18.17", "20.x", "14.x"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel fichier permet de créer un endpoint API ?",
+                                options: ["api.ts", "route.ts", "endpoint.ts", "handler.ts"],
+                                correctAnswer: 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -126,47 +312,367 @@ Votre application est maintenant accessible sur [http://localhost:3000](http://l
                 title: "React 19 & Server Components",
                 lessons: [
                     {
-                        title: "Comprendre les Server Components",
-                        duration: "20:00",
+                        title: "Introduction aux Server Components",
+                        duration: "20:15",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                        videoUrl: "https://www.youtube.com/embed/TQQPAU21ZUw"
                     },
                     {
-                        title: "Le hook use() et les nouvelles APIs",
-                        duration: "12:00",
+                        title: "Server Components vs Client Components",
+                        duration: "25:30",
                         type: "text",
-                        content: `
-# React 19 : Le hook use()
+                        content: `# Server Components vs Client Components
 
-Le nouveau hook \`use()\` est une API polyvalente qui permet de lire la valeur d'une ressource comme une Promise ou un Context.
+## Qu'est-ce qu'un Server Component ?
 
-## Utilisation avec une Promise
+Les **Server Components** sont une nouvelle fonctionnalité de React 19 qui permet de rendre des composants côté serveur, réduisant ainsi la taille du bundle JavaScript envoyé au client.
+
+### Avantages des Server Components
+
+✅ **Performance** : Moins de JavaScript côté client
+✅ **SEO** : Contenu rendu côté serveur
+✅ **Sécurité** : Accès direct aux bases de données et APIs
+✅ **Simplicité** : Pas besoin de useEffect pour fetcher les données
+
+## Par défaut : Server Components
+
+Dans Next.js 15, **tous les composants sont des Server Components par défaut** :
 
 \`\`\`tsx
-import { use } from 'react';
-
-function Message({ messagePromise }) {
-  const message = use(messagePromise);
-  return <p>{message}</p>;
+// app/page.tsx - Server Component par défaut
+export default async function HomePage() {
+  // Vous pouvez faire des appels directs à la base de données
+  const posts = await db.post.findMany()
+  
+  return (
+    <div>
+      <h1>Articles</h1>
+      {posts.map(post => (
+        <article key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
+        </article>
+      ))}
+    </div>
+  )
 }
 \`\`\`
 
-Contrairement aux autres hooks, \`use()\` peut être appelé à l'intérieur de boucles et de conditions.
-                        `
+## Client Components
+
+Pour utiliser des hooks React ou des événements, ajoutez la directive \`'use client'\` :
+
+\`\`\`tsx
+'use client'
+
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Compteur : {count}
+    </button>
+  )
+}
+\`\`\`
+
+## Quand utiliser chaque type ?
+
+### Utilisez Server Components pour :
+- Fetcher des données
+- Accéder aux ressources backend
+- Garder des dépendances sensibles côté serveur
+- Réduire le JavaScript côté client
+
+### Utilisez Client Components pour :
+- Interactivité (onClick, onChange, etc.)
+- Hooks React (useState, useEffect, etc.)
+- APIs du navigateur (localStorage, etc.)
+- Composants de librairies tierces nécessitant le client
+
+## Composition : Le meilleur des deux mondes
+
+Vous pouvez combiner Server et Client Components :
+
+\`\`\`tsx
+// app/page.tsx - Server Component
+import ClientCounter from './ClientCounter'
+
+export default async function Page() {
+  const data = await fetchData() // Côté serveur
+  
+  return (
+    <div>
+      <h1>{data.title}</h1>
+      <ClientCounter /> {/* Client Component imbriqué */}
+    </div>
+  )
+}
+\`\`\`
+
+## Règles importantes
+
+1. ❌ Vous ne pouvez pas importer un Server Component dans un Client Component
+2. ✅ Vous pouvez passer un Server Component comme children à un Client Component
+3. ❌ Les Client Components ne peuvent pas être async
+4. ✅ Les Server Components peuvent être async
+
+## Exemple pratique
+
+\`\`\`tsx
+// app/dashboard/page.tsx - Server Component
+import { Suspense } from 'react'
+import UserStats from './UserStats' // Server Component
+import InteractiveChart from './InteractiveChart' // Client Component
+
+export default async function Dashboard() {
+  const user = await getUser()
+  
+  return (
+    <div>
+      <h1>Tableau de bord de {user.name}</h1>
+      
+      <Suspense fallback={<div>Chargement des stats...</div>}>
+        <UserStats userId={user.id} />
+      </Suspense>
+      
+      <InteractiveChart data={user.chartData} />
+    </div>
+  )
+}
+\`\`\``
                     },
                     {
-                        title: "Quiz : React 19",
-                        duration: "05:00",
+                        title: "Le hook use() de React 19",
+                        duration: "16:40",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/ytXM05PVcFU"
+                    },
+                    {
+                        title: "Server Actions et mutations de données",
+                        duration: "28:20",
+                        type: "text",
+                        content: `# Server Actions dans Next.js 15
+
+## Qu'est-ce qu'une Server Action ?
+
+Les **Server Actions** permettent d'exécuter du code côté serveur directement depuis vos composants, sans créer d'API routes.
+
+## Création d'une Server Action
+
+Utilisez la directive \`'use server'\` :
+
+\`\`\`tsx
+// app/actions.ts
+'use server'
+
+import { revalidatePath } from 'next/cache'
+import { db } from '@/lib/db'
+
+export async function createPost(formData: FormData) {
+  const title = formData.get('title') as string
+  const content = formData.get('content') as string
+  
+  await db.post.create({
+    data: { title, content }
+  })
+  
+  revalidatePath('/blog')
+}
+\`\`\`
+
+## Utilisation dans un formulaire
+
+\`\`\`tsx
+// app/blog/new/page.tsx
+import { createPost } from '@/app/actions'
+
+export default function NewPost() {
+  return (
+    <form action={createPost}>
+      <input name="title" placeholder="Titre" required />
+      <textarea name="content" placeholder="Contenu" required />
+      <button type="submit">Publier</button>
+    </form>
+  )
+}
+\`\`\`
+
+## Avec useFormState pour le feedback
+
+\`\`\`tsx
+'use client'
+
+import { useFormState } from 'react-dom'
+import { createPost } from '@/app/actions'
+
+export default function NewPostForm() {
+  const [state, formAction] = useFormState(createPost, null)
+  
+  return (
+    <form action={formAction}>
+      {state?.error && <p className="error">{state.error}</p>}
+      <input name="title" />
+      <button type="submit">Créer</button>
+    </form>
+  )
+}
+\`\`\`
+
+## Avantages
+
+✅ Pas besoin de créer des routes API
+✅ Type-safe avec TypeScript
+✅ Gestion automatique de la sérialisation
+✅ Progressive Enhancement (fonctionne sans JS)
+
+## Bonnes pratiques
+
+1. Validez toujours les données côté serveur
+2. Utilisez \`revalidatePath()\` pour mettre à jour le cache
+3. Retournez des objets sérialisables
+4. Gérez les erreurs proprement`
+                    },
+                    {
+                        title: "Quiz : React 19 & Server Components",
+                        duration: "12:00",
                         type: "quiz",
                         questions: [
                             {
-                                question: "Quelle est la principale nouveauté de React 19 concernant le rendu ?",
-                                options: ["Les Server Components", "Les Class Components", "Les Mixins", "jQuery"],
+                                question: "Par défaut, les composants dans Next.js 15 sont :",
+                                options: ["Client Components", "Server Components", "Hybrid Components", "Static Components"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle directive permet de créer un Client Component ?",
+                                options: ["'use client'", "'client side'", "'use browser'", "'client component'"],
                                 correctAnswer: 0
                             },
                             {
-                                question: "Le hook use() peut-il être utilisé dans une condition ?",
-                                options: ["Oui", "Non", "Seulement dans useEffect", "Jamais"],
+                                question: "Les Server Components peuvent-ils être async ?",
+                                options: ["Oui", "Non", "Seulement avec un wrapper", "Seulement dans les layouts"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle directive permet de créer une Server Action ?",
+                                options: ["'use action'", "'use server'", "'server side'", "'use backend'"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Peut-on importer un Server Component dans un Client Component ?",
+                                options: ["Oui, toujours", "Non, jamais directement", "Seulement avec un HOC", "Seulement dans les pages"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel hook permet de gérer l'état d'un formulaire avec Server Actions ?",
+                                options: ["useFormState", "useState", "useServerState", "useActionState"],
+                                correctAnswer: 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "Routing et Navigation",
+                lessons: [
+                    {
+                        title: "Système de routing basé sur les fichiers",
+                        duration: "18:30",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/nSJBXwLEQJA"
+                    },
+                    {
+                        title: "Navigation avec Link et useRouter",
+                        duration: "14:25",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/ZHn726VDoE4"
+                    },
+                    {
+                        title: "Routes dynamiques et catch-all",
+                        duration: "20:10",
+                        type: "text",
+                        content: `# Routes dynamiques dans Next.js
+
+## Routes dynamiques simples
+
+Créez un dossier avec des crochets \`[param]\` :
+
+\`\`\`tsx
+// app/blog/[slug]/page.tsx
+export default function BlogPost({ params }: { params: { slug: string } }) {
+  return <h1>Article : {params.slug}</h1>
+}
+\`\`\`
+
+URL : \`/blog/mon-article\` → \`params.slug = "mon-article"\`
+
+## Routes dynamiques multiples
+
+\`\`\`tsx
+// app/shop/[category]/[product]/page.tsx
+export default function Product({ 
+  params 
+}: { 
+  params: { category: string; product: string } 
+}) {
+  return (
+    <div>
+      <p>Catégorie : {params.category}</p>
+      <p>Produit : {params.product}</p>
+    </div>
+  )
+}
+\`\`\`
+
+URL : \`/shop/electronics/laptop\`
+
+## Catch-all routes
+
+Utilisez \`[...param]\` pour capturer tous les segments :
+
+\`\`\`tsx
+// app/docs/[...slug]/page.tsx
+export default function Docs({ params }: { params: { slug: string[] } }) {
+  return <p>Path : {params.slug.join('/')}</p>
+}
+\`\`\`
+
+- \`/docs/getting-started\` → \`slug = ["getting-started"]\`
+- \`/docs/api/reference/auth\` → \`slug = ["api", "reference", "auth"]\`
+
+## Optional catch-all routes
+
+Utilisez \`[[...param]]\` pour rendre le catch-all optionnel :
+
+\`\`\`tsx
+// app/shop/[[...categories]]/page.tsx
+\`\`\`
+
+Correspond à :
+- \`/shop\` → \`categories = undefined\`
+- \`/shop/electronics\` → \`categories = ["electronics"]\`
+- \`/shop/electronics/laptops\` → \`categories = ["electronics", "laptops"]\``
+                    },
+                    {
+                        title: "Quiz : Routing",
+                        duration: "8:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Comment créer une route dynamique ?",
+                                options: ["[param]", ":param", "{param}", "<param>"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle syntaxe pour un catch-all route ?",
+                                options: ["[...slug]", "[*slug]", "[slug*]", "[slug+]"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Comment rendre un catch-all optionnel ?",
+                                options: ["[[...slug]]", "[...slug?]", "[...slug]?", "[?...slug]"],
                                 correctAnswer: 0
                             }
                         ]
@@ -177,13 +683,31 @@ Contrairement aux autres hooks, \`use()\` peut être appelé à l'intérieur de 
                 title: "Projet Final & Certification",
                 lessons: [
                     {
-                        title: "Construction du projet final",
-                        duration: "45:00",
+                        title: "Planification du projet fullstack",
+                        duration: "22:00",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                        videoUrl: "https://www.youtube.com/embed/VSB2h7mVhPg"
                     },
                     {
-                        title: "Examen final",
+                        title: "Construction du backend avec Prisma",
+                        duration: "35:40",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/RebA5J-rlwg"
+                    },
+                    {
+                        title: "Authentification avec NextAuth",
+                        duration: "28:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/1MTyCvS05V4"
+                    },
+                    {
+                        title: "Déploiement sur Vercel",
+                        duration: "18:30",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/2HBIzEx6IZA"
+                    },
+                    {
+                        title: "Examen final Next.js",
                         duration: "30:00",
                         type: "quiz",
                         questions: [
@@ -201,6 +725,41 @@ Contrairement aux autres hooks, \`use()\` peut être appelé à l'intérieur de 
                                 question: "Quelle fonction permet de revalider des données ?",
                                 options: ["revalidatePath", "refresh()", "reload()", "update()"],
                                 correctAnswer: 0
+                            },
+                            {
+                                question: "Les Server Components peuvent-ils utiliser useState ?",
+                                options: ["Oui", "Non", "Seulement avec 'use client'", "Seulement dans les pages"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle est la commande pour créer un build de production ?",
+                                options: ["npm run prod", "npm run build", "npm run compile", "npm run deploy"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Où placer les fichiers statiques (images, fonts) ?",
+                                options: ["assets/", "static/", "public/", "resources/"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "Comment créer un endpoint API dans Next.js 15 ?",
+                                options: ["api.ts", "route.ts", "endpoint.ts", "handler.ts"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle directive marque un composant comme Client Component ?",
+                                options: ["'use client'", "'client side'", "'use browser'", "'client'"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Les Server Actions nécessitent quelle directive ?",
+                                options: ["'use action'", "'use server'", "'server'", "'action'"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel composant Next.js optimise automatiquement les images ?",
+                                options: ["<img>", "<Image>", "<Picture>", "<OptimizedImage>"],
+                                correctAnswer: 1
                             }
                         ]
                     },
@@ -208,7 +767,7 @@ Contrairement aux autres hooks, \`use()\` peut être appelé à l'intérieur de 
                         title: "Obtenir votre certificat",
                         duration: "02:00",
                         type: "text",
-                        content: "CERTIFICAT" // Marker for certificate component
+                        content: "CERTIFICAT"
                     }
                 ]
             }
