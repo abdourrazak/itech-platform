@@ -2824,7 +2824,7 @@ Content-Security-Policy: default-src 'self';
         price: 0,
         rating: 4.6,
         reviewsCount: 64,
-        lessonsCount: 38,
+        lessonsCount: 9,
         duration: "14h",
         slug: "react-native-mobile",
         lastUpdated: "Octobre 2024",
@@ -2839,25 +2839,198 @@ Content-Security-Policy: default-src 'self';
             {
                 title: "Démarrer avec React Native",
                 lessons: [
-                    { title: "React Native vs Web", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Installation d'Expo", duration: "15:00", type: "text", content: "# Expo\n\nFramework pour React Native..." },
-                    { title: "Premier écran", duration: "12:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
+                    {
+                        title: "Introduction à React Native & Expo",
+                        duration: "14:20",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/0-S5a0eXPoc"
+                    },
+                    {
+                        title: "Installation et Configuration",
+                        duration: "20:00",
+                        type: "text",
+                        content: `# Démarrer avec Expo
+
+Expo est le moyen le plus simple de créer des applications React Native.
+
+## Prérequis
+- Node.js (LTS)
+- Un smartphone (iOS ou Android) avec l'app **Expo Go** installée
+
+## Créer un projet
+
+\`\`\`bash
+# Créer le projet
+npx create-expo-app@latest mon-app
+
+# Aller dans le dossier
+cd mon-app
+
+# Lancer le serveur de développement
+npx expo start
+\`\`\`
+
+Scannez le QR code avec votre téléphone pour voir l'application !
+
+## Structure d'un composant
+
+\`\`\`tsx
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Bonjour le monde !</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});
+\`\`\``
+                    },
+                    {
+                        title: "Quiz : Écosystème Mobile",
+                        duration: "05:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quel outil permet de tester l'app sur son téléphone ?",
+                                options: ["Expo Go", "React Go", "Native Go", "TestFlight"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle commande lance le serveur de dev ?",
+                                options: ["npm run dev", "npx expo start", "react-native run", "expo go"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "React Native utilise-t-il le DOM ?",
+                                options: ["Oui", "Non, il utilise des composants natifs", "Parfois", "Uniquement sur iOS"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 title: "Composants & Navigation",
                 lessons: [
-                    { title: "Composants natifs (View, Text...)", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "React Navigation", duration: "25:00", type: "text", content: "# Navigation\n\nStack, Tab, Drawer..." },
-                    { title: "Quiz : Mobile Dev", duration: "10:00", type: "quiz", questions: [{ question: "Equivalent de div ?", options: ["View", "Div", "Box"], correctAnswer: 0 }] }
+                    {
+                        title: "Les composants fondamentaux (View, Text, Image)",
+                        duration: "22:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/VozPNrt-LFxE"
+                    },
+                    {
+                        title: "Mise en page avec Flexbox",
+                        duration: "25:00",
+                        type: "text",
+                        content: `# Flexbox dans React Native
+
+Flexbox fonctionne différemment du Web :
+- **flexDirection** est 'column' par défaut (pas 'row')
+- **flex: 1** remplit tout l'espace disponible
+
+## Propriétés essentielles
+
+### flexDirection
+\`\`\`tsx
+// Colonne (défaut)
+flexDirection: 'column'
+
+// Ligne
+flexDirection: 'row'
+\`\`\`
+
+### justifyContent (Axe principal)
+- flex-start
+- center
+- flex-end
+- space-between
+- space-around
+
+### alignItems (Axe secondaire)
+- stretch (défaut)
+- flex-start
+- center
+- flex-end
+
+## Exemple de layout
+
+\`\`\`tsx
+<View style={{ flex: 1, flexDirection: 'row' }}>
+  <View style={{ width: 50, height: 50, backgroundColor: 'red' }} />
+  <View style={{ width: 50, height: 50, backgroundColor: 'blue' }} />
+  <View style={{ width: 50, height: 50, backgroundColor: 'green' }} />
+</View>
+\`\`\``
+                    },
+                    {
+                        title: "Navigation avec Expo Router",
+                        duration: "18:40",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/60ItDlYmTls"
+                    }
                 ]
             },
             {
                 title: "Publication & Certificat",
                 lessons: [
-                    { title: "Build & Deploy", duration: "30:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Examen final Mobile", duration: "20:00", type: "quiz", questions: [{ question: "EAS Build sert à ?", options: ["Build dans le cloud", "Rien", "Test"], correctAnswer: 0 }] },
-                    { title: "Certificat", duration: "01:00", type: "text", content: "CERTIFICAT" }
+                    {
+                        title: "Déploiement sur les Stores avec EAS",
+                        duration: "35:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/K8e6f1i7hH0"
+                    },
+                    {
+                        title: "Examen final Mobile",
+                        duration: "25:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quel est l'équivalent de <div> en React Native ?",
+                                options: ["<View>", "<Container>", "<Box>", "<Div>"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle est la direction par défaut de Flexbox ?",
+                                options: ["row", "column", "row-reverse", "column-reverse"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment gérer le scroll ?",
+                                options: ["<View scroll>", "<ScrollView>", "<Scroll>", "<List>"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel service d'Expo gère le build ?",
+                                options: ["EAS Build", "Expo Cloud", "React Build", "Native Build"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Comment styliser un composant ?",
+                                options: ["CSS Class", "StyleSheet", "SASS", "Styled-components uniquement"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    },
+                    {
+                        title: "Certificat de réussite",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
