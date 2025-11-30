@@ -1720,7 +1720,7 @@ print(classification_report(y_test, y_pred))
         price: 0,
         rating: 4.9,
         reviewsCount: 56,
-        lessonsCount: 18,
+        lessonsCount: 12,
         duration: "6h",
         slug: "framer-motion-animations",
         lastUpdated: "Décembre 2024",
@@ -1735,25 +1735,364 @@ print(classification_report(y_test, y_pred))
             {
                 title: "Bases de l'animation",
                 lessons: [
-                    { title: "Introduction à Framer Motion", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Propriétés d'animation", duration: "15:00", type: "text", content: "# Framer Motion\n\nLibrary d'animation pour React..." },
-                    { title: "Quiz : Principes d'animation", duration: "05:00", type: "quiz", questions: [{ question: "Quelle prop pour animer ?", options: ["animate", "move", "run"], correctAnswer: 0 }] }
+                    {
+                        title: "Introduction à Framer Motion",
+                        duration: "14:25",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/znbCa4Rr054"
+                    },
+                    {
+                        title: "Propriétés d'animation essentielles",
+                        duration: "20:30",
+                        type: "text",
+                        content: `# Framer Motion : Les Bases
+
+## Installation
+
+\`\`\`bash
+npm install framer-motion
+# ou
+yarn add framer-motion
+\`\`\`
+
+## Premier composant animé
+
+\`\`\`tsx
+import { motion } from 'framer-motion'
+
+export default function Box() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="w-32 h-32 bg-blue-500 rounded-lg"
+    />
+  )
+}
+\`\`\`
+
+## Propriétés clés
+
+### initial
+État de départ de l'animation
+\`\`\`tsx
+initial={{ x: -100, opacity: 0 }}
+\`\`\`
+
+### animate
+État final de l'animation
+\`\`\`tsx
+animate={{ x: 0, opacity: 1 }}
+\`\`\`
+
+### transition
+Configuration de la transition
+\`\`\`tsx
+transition={{
+  duration: 0.8,
+  delay: 0.2,
+  ease: "easeInOut"
+}}
+\`\`\`
+
+## Types d'easing
+
+\`\`\`tsx
+// Linear
+ease: "linear"
+
+// Ease in/out
+ease: "easeIn"
+ease: "easeOut"
+ease: "easeInOut"
+
+// Spring (physique)
+type: "spring"
+stiffness: 100
+damping: 10
+
+// Custom cubic-bezier
+ease: [0.17, 0.67, 0.83, 0.67]
+\`\`\``
+                    },
+                    {
+                        title: "Variants et orchestration",
+                        duration: "18:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/2V1WK-3HQNk"
+                    },
+                    {
+                        title: "Quiz : Principes d'animation",
+                        duration: "08:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle prop définit l'état final de l'animation ?",
+                                options: ["initial", "animate", "transition", "exit"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel type d'animation simule la physique ?",
+                                options: ["linear", "spring", "ease", "cubic"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment importer motion ?",
+                                options: ["import motion from 'framer-motion'", "import { motion } from 'framer-motion'", "import * as motion from 'framer-motion'", "require('framer-motion')"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 title: "Animations Complexes",
                 lessons: [
-                    { title: "Layout Animations", duration: "18:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Gestures & Drag", duration: "20:00", type: "text", content: "# Gestures\n\nDrag, hover, tap..." },
-                    { title: "Scroll Animations", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
+                    {
+                        title: "Layout Animations avec layoutId",
+                        duration: "22:40",
+                        type: "text",
+                        content: `# Layout Animations
+
+## Shared Element Transitions
+
+\`\`\`tsx
+import { motion } from 'framer-motion'
+import { useState } from 'react'
+
+export default function SharedElement() {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <div onClick={() => setIsExpanded(!isExpanded)}>
+      {!isExpanded ? (
+        <motion.div
+          layoutId="box"
+          className="w-32 h-32 bg-purple-500 rounded-lg"
+        />
+      ) : (
+        <motion.div
+          layoutId="box"
+          className="w-full h-64 bg-purple-500 rounded-lg"
+        />
+      )}
+    </div>
+  )
+}
+\`\`\`
+
+## Layout prop
+
+Anime automatiquement les changements de layout :
+
+\`\`\`tsx
+<motion.div layout className="card">
+  {items.map(item => (
+    <motion.div key={item.id} layout>
+      {item.content}
+    </motion.div>
+  ))}
+</motion.div>
+\`\`\`
+
+## AnimatePresence
+
+Anime les éléments qui entrent/sortent du DOM :
+
+\`\`\`tsx
+import { AnimatePresence, motion } from 'framer-motion'
+
+<AnimatePresence>
+  {isVisible && (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+    >
+      Je peux être animé à la sortie !
+    </motion.div>
+  )}
+</AnimatePresence>
+\`\`\``
+                    },
+                    {
+                        title: "Gestures : Drag, Hover, Tap",
+                        duration: "19:30",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/SuqU904ZHA4"
+                    },
+                    {
+                        title: "Scroll Animations avec useScroll",
+                        duration: "24:20",
+                        type: "text",
+                        content: `# Scroll Animations
+
+## useScroll Hook
+
+\`\`\`tsx
+import { motion, useScroll, useTransform } from 'framer-motion'
+
+export default function ScrollAnimation() {
+  const { scrollYProgress } = useScroll()
+  
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.5])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0])
+
+  return (
+    <motion.div
+      style={{ scale, opacity }}
+      className="fixed top-0"
+    >
+      Scroll pour voir l'animation
+    </motion.div>
+  )
+}
+\`\`\`
+
+## Parallax Effect
+
+\`\`\`tsx
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+
+export default function Parallax() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"])
+
+  return (
+    <div ref={ref} className="h-screen">
+      <motion.div style={{ y }}>
+        <img src="/image.jpg" alt="Parallax" />
+      </motion.div>
+    </div>
+  )
+}
+\`\`\``
+                    },
+                    {
+                        title: "Quiz : Animations avancées",
+                        duration: "10:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "À quoi sert layoutId ?",
+                                options: ["Identifier un layout", "Shared Element Transitions", "Débugger", "Rien"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel composant permet d'animer la sortie du DOM ?",
+                                options: ["motion.div", "AnimatePresence", "LayoutGroup", "Variants"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "useScroll retourne quoi ?",
+                                options: ["La position du scroll", "scrollYProgress", "Les deux", "Rien"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "Comment activer le drag ?",
+                                options: ["drag={true}", "drag='x'", "drag='y'", "Toutes les réponses"],
+                                correctAnswer: 3
+                            }
+                        ]
+                    }
                 ]
             },
             {
-                title: "Projet & Certificat",
+                title: "Projet & Certification",
                 lessons: [
-                    { title: "Création d'un portfolio animé", duration: "30:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Examen final Animation", duration: "15:00", type: "quiz", questions: [{ question: "LayoutId sert à ?", options: ["Shared Element Transition", "Rien", "Debug"], correctAnswer: 0 }] },
-                    { title: "Certificat", duration: "01:00", type: "text", content: "CERTIFICAT" }
+                    {
+                        title: "Projet : Portfolio animé complet",
+                        duration: "32:45",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/qJt-FtzJ5fo"
+                    },
+                    {
+                        title: "Optimisation des performances",
+                        duration: "16:20",
+                        type: "text",
+                        content: `# Optimisation des Animations
+
+## Bonnes pratiques
+
+### 1. Utilisez transform et opacity
+Ces propriétés sont accélérées par le GPU :
+\`\`\`tsx
+// ✅ Bon
+animate={{ x: 100, opacity: 0.5 }}
+
+// ❌ Éviter
+animate={{ left: "100px", display: "none" }}
+\`\`\`
+
+### 2. will-change
+\`\`\`tsx
+<motion.div style={{ willChange: "transform" }}>
+\`\`\`
+
+### 3. Réduire les re-renders
+\`\`\`tsx
+const variants = useMemo(() => ({
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
+}), [])
+\`\`\`
+
+### 4. useReducedMotion
+Respectez les préférences utilisateur :
+\`\`\`tsx
+import { useReducedMotion } from 'framer-motion'
+
+const shouldReduceMotion = useReducedMotion()
+const transition = shouldReduceMotion 
+  ? { duration: 0 } 
+  : { duration: 0.5 }
+\`\`\``
+                    },
+                    {
+                        title: "Examen final Framer Motion",
+                        duration: "20:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelles propriétés sont accélérées par le GPU ?",
+                                options: ["width et height", "transform et opacity", "color et background", "margin et padding"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment créer un effet parallax ?",
+                                options: ["useScroll + useTransform", "useParallax", "useMotion", "useAnimation"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Que fait le prop 'layout' ?",
+                                options: ["Rien", "Anime les changements de layout automatiquement", "Définit le layout", "Crée un layout"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment respecter les préférences d'accessibilité ?",
+                                options: ["useReducedMotion", "useAccessibility", "useA11y", "Impossible"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quel hook pour animer au scroll ?",
+                                options: ["useAnimation", "useScroll", "useMotion", "useTransform"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    },
+                    {
+                        title: "Certificat Framer Motion",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
