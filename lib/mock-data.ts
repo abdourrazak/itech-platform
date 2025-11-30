@@ -2107,7 +2107,7 @@ const transition = shouldReduceMotion
         price: 0,
         rating: 4.8,
         reviewsCount: 145,
-        lessonsCount: 35,
+        lessonsCount: 9,
         duration: "10h",
         slug: "typescript-expert",
         lastUpdated: "Août 2024",
@@ -2122,25 +2122,276 @@ const transition = shouldReduceMotion
             {
                 title: "Les bases de TypeScript",
                 lessons: [
-                    { title: "Pourquoi TypeScript ?", duration: "08:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Types primitifs et interfaces", duration: "12:00", type: "text", content: "# TypeScript Types\n\nString, Number, Boolean..." },
-                    { title: "Quiz : Typage statique", duration: "05:00", type: "quiz", questions: [{ question: "Extension de fichier TS ?", options: [".ts", ".js", ".jsx"], correctAnswer: 0 }] }
+                    {
+                        title: "Pourquoi TypeScript ?",
+                        duration: "10:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/zQnBQ4tB3ZA"
+                    },
+                    {
+                        title: "Types primitifs et interfaces",
+                        duration: "15:30",
+                        type: "text",
+                        content: `# TypeScript : Les Fondamentaux
+
+## Types Primitifs
+
+\`\`\`typescript
+// String
+let nom: string = "Alice";
+
+// Number
+let age: number = 25;
+
+// Boolean
+let isStudent: boolean = true;
+
+// Array
+let skills: string[] = ["JS", "TS", "React"];
+let scores: Array<number> = [10, 20, 30];
+
+// Tuple
+let user: [string, number] = ["Alice", 25];
+
+// Enum
+enum Role {
+  ADMIN,
+  USER,
+  GUEST
+}
+let myRole: Role = Role.ADMIN;
+
+// Any (à éviter)
+let data: any = "Peut être n'importe quoi";
+
+// Void (pas de retour)
+function log(message: string): void {
+  console.log(message);
+}
+\`\`\`
+
+## Interfaces vs Types
+
+### Interface
+Idéal pour définir la forme d'un objet et extensible.
+
+\`\`\`typescript
+interface User {
+  id: number;
+  name: string;
+  email?: string; // Optionnel
+}
+
+interface Admin extends User {
+  permissions: string[];
+}
+\`\`\`
+
+### Type Alias
+Plus flexible, permet les unions et intersections.
+
+\`\`\`typescript
+type ID = string | number;
+
+type User = {
+  id: ID;
+  name: string;
+};
+
+type Admin = User & {
+  permissions: string[];
+};
+\`\`\`
+
+## Fonctions typées
+
+\`\`\`typescript
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+const multiply = (a: number, b: number): number => a * b;
+\`\`\``
+                    },
+                    {
+                        title: "Quiz : Typage statique",
+                        duration: "08:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle est l'extension d'un fichier TypeScript ?",
+                                options: [".ts", ".js", ".jsx", ".java"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quel type utiliser pour un tableau de chaînes ?",
+                                options: ["string[]", "Array<string>", "Les deux", "List<String>"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "Comment définir une propriété optionnelle ?",
+                                options: ["prop?", "prop!", "optional prop", "maybe prop"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle est la différence entre interface et type ?",
+                                options: ["Aucune", "Interface est pour les objets, Type est plus flexible", "Type est déprécié", "Interface est plus lente"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 title: "TypeScript Avancé",
                 lessons: [
-                    { title: "Generics et Utility Types", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Type Narrowing & Guards", duration: "15:00", type: "text", content: "# Generics\n\n<T>..." },
-                    { title: "Decorators", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
+                    {
+                        title: "Generics et Utility Types",
+                        duration: "22:45",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/BCg4U1FzODs"
+                    },
+                    {
+                        title: "Type Narrowing & Guards",
+                        duration: "18:20",
+                        type: "text",
+                        content: `# TypeScript Avancé
+
+## Generics
+
+Les génériques permettent de créer des composants réutilisables.
+
+\`\`\`typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output1 = identity<string>("myString");
+let output2 = identity<number>(100);
+
+// Interface générique
+interface Box<T> {
+  contents: T;
+}
+
+let stringBox: Box<string> = { contents: "Hello" };
+\`\`\`
+
+## Utility Types
+
+TypeScript fournit des types utilitaires puissants.
+
+### Partial<T>
+Rend toutes les propriétés optionnelles.
+\`\`\`typescript
+interface Todo {
+  title: string;
+  description: string;
+}
+
+function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>) {
+  return { ...todo, ...fieldsToUpdate };
+}
+\`\`\`
+
+### Pick<T, K>
+Sélectionne un sous-ensemble de propriétés.
+\`\`\`typescript
+type TodoPreview = Pick<Todo, "title">;
+\`\`\`
+
+### Omit<T, K>
+Exclut un sous-ensemble de propriétés.
+\`\`\`typescript
+type TodoInfo = Omit<Todo, "completed">;
+\`\`\`
+
+### Record<K, T>
+Construit un type objet.
+\`\`\`typescript
+type PageInfo = {
+  title: string;
+};
+
+type Pages = Record<"home" | "about" | "contact", PageInfo>;
+\`\`\`
+
+## Type Guards
+
+Permet de rétrécir le type (Type Narrowing).
+
+\`\`\`typescript
+function padLeft(value: string, padding: string | number) {
+  if (typeof padding === "number") {
+    return Array(padding + 1).join(" ") + value;
+  }
+  if (typeof padding === "string") {
+    return padding + value;
+  }
+  throw new Error(\`Expected string or number, got '\${padding}'.\`);
+}
+
+// Custom Type Guard
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined;
+}
+\`\`\``
+                    },
+                    {
+                        title: "Decorators et Configuration",
+                        duration: "14:50",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/O6Ngrea3jKk"
+                    }
                 ]
             },
             {
                 title: "Certification",
                 lessons: [
-                    { title: "Projet : Librairie typée", duration: "35:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Examen final TypeScript", duration: "25:00", type: "quiz", questions: [{ question: "Partial<T> rend tout optionnel ?", options: ["Oui", "Non"], correctAnswer: 0 }] },
-                    { title: "Certificat de réussite", duration: "01:00", type: "text", content: "CERTIFICAT" }
+                    {
+                        title: "Projet : Créer une librairie typée",
+                        duration: "40:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/1jMJDbqPslI"
+                    },
+                    {
+                        title: "Examen final TypeScript",
+                        duration: "25:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Que fait Partial<T> ?",
+                                options: ["Rend tout optionnel", "Rend tout obligatoire", "Supprime des propriétés", "Ajoute des propriétés"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quel mot-clé pour définir un type générique ?",
+                                options: ["<T>", "[T]", "{T}", "(T)"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "À quoi sert 'keyof' ?",
+                                options: ["Obtenir les clés d'un type", "Obtenir les valeurs", "Créer une clé", "Supprimer une clé"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quel fichier configure le compilateur TS ?",
+                                options: ["tsconfig.json", "package.json", "ts.config", "config.ts"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Le type 'unknown' est-il plus sûr que 'any' ?",
+                                options: ["Oui", "Non", "C'est la même chose", "Unknown n'existe pas"],
+                                correctAnswer: 0
+                            }
+                        ]
+                    },
+                    {
+                        title: "Certificat de réussite",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
