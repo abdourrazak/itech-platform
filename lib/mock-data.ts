@@ -2,6 +2,13 @@ export interface Lesson {
     title: string
     duration: string
     type: "video" | "text" | "quiz"
+    videoUrl?: string
+    content?: string
+    questions?: {
+        question: string
+        options: string[]
+        correctAnswer: number
+    }[]
 }
 
 export interface Section {
@@ -68,25 +75,141 @@ export const courses: Course[] = [
             {
                 title: "Introduction à Next.js 15",
                 lessons: [
-                    { title: "Pourquoi Next.js ?", duration: "10:00", type: "video" },
-                    { title: "Installation et configuration", duration: "15:00", type: "text" },
-                    { title: "Structure du projet", duration: "08:00", type: "video" }
+                    {
+                        title: "Pourquoi Next.js ?",
+                        duration: "10:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" // Exemple placeholder
+                    },
+                    {
+                        title: "Installation et configuration",
+                        duration: "15:00",
+                        type: "text",
+                        content: `
+# Installation de Next.js 15
+
+Pour commencer un nouveau projet Next.js, ouvrez votre terminal et exécutez la commande suivante :
+
+\`\`\`bash
+npx create-next-app@latest
+\`\`\`
+
+Lors de l'installation, vous verrez les invites suivantes :
+
+- **What is your project named?** my-app
+- **Would you like to use TypeScript?** Yes
+- **Would you like to use ESLint?** Yes
+- **Would you like to use Tailwind CSS?** Yes
+- **Would you like to use \`src/\` directory?** No
+- **Would you like to use App Router?** Yes
+- **Would you like to customize the default import alias?** No
+
+Une fois l'installation terminée, naviguez dans le dossier de votre projet :
+
+\`\`\`bash
+cd my-app
+npm run dev
+\`\`\`
+
+Votre application est maintenant accessible sur [http://localhost:3000](http://localhost:3000).
+                        `
+                    },
+                    {
+                        title: "Structure du projet",
+                        duration: "08:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    }
                 ]
             },
             {
                 title: "React 19 & Server Components",
                 lessons: [
-                    { title: "Comprendre les Server Components", duration: "20:00", type: "video" },
-                    { title: "Le hook use() et les nouvelles APIs", duration: "12:00", type: "text" },
-                    { title: "Quiz : React 19", duration: "05:00", type: "quiz" }
+                    {
+                        title: "Comprendre les Server Components",
+                        duration: "20:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    },
+                    {
+                        title: "Le hook use() et les nouvelles APIs",
+                        duration: "12:00",
+                        type: "text",
+                        content: `
+# React 19 : Le hook use()
+
+Le nouveau hook \`use()\` est une API polyvalente qui permet de lire la valeur d'une ressource comme une Promise ou un Context.
+
+## Utilisation avec une Promise
+
+\`\`\`tsx
+import { use } from 'react';
+
+function Message({ messagePromise }) {
+  const message = use(messagePromise);
+  return <p>{message}</p>;
+}
+\`\`\`
+
+Contrairement aux autres hooks, \`use()\` peut être appelé à l'intérieur de boucles et de conditions.
+                        `
+                    },
+                    {
+                        title: "Quiz : React 19",
+                        duration: "05:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle est la principale nouveauté de React 19 concernant le rendu ?",
+                                options: ["Les Server Components", "Les Class Components", "Les Mixins", "jQuery"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Le hook use() peut-il être utilisé dans une condition ?",
+                                options: ["Oui", "Non", "Seulement dans useEffect", "Jamais"],
+                                correctAnswer: 0
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 title: "Projet Final & Certification",
                 lessons: [
-                    { title: "Construction du projet final", duration: "45:00", type: "video" },
-                    { title: "Examen final", duration: "30:00", type: "quiz" },
-                    { title: "Obtenir votre certificat", duration: "02:00", type: "text" }
+                    {
+                        title: "Construction du projet final",
+                        duration: "45:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    },
+                    {
+                        title: "Examen final",
+                        duration: "30:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quel fichier définit le layout racine dans Next.js 15 ?",
+                                options: ["_app.js", "layout.tsx", "page.tsx", "index.html"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment définir une route dynamique ?",
+                                options: ["/users/:id", "/users/[id]", "/users/{id}", "/users/(id)"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle fonction permet de revalider des données ?",
+                                options: ["revalidatePath", "refresh()", "reload()", "update()"],
+                                correctAnswer: 0
+                            }
+                        ]
+                    },
+                    {
+                        title: "Obtenir votre certificat",
+                        duration: "02:00",
+                        type: "text",
+                        content: "CERTIFICAT" // Marker for certificate component
+                    }
                 ]
             }
         ]
@@ -116,25 +239,75 @@ export const courses: Course[] = [
             {
                 title: "Les bases de Docker",
                 lessons: [
-                    { title: "Introduction aux conteneurs", duration: "12:00", type: "video" },
-                    { title: "Écrire un Dockerfile", duration: "15:00", type: "text" },
-                    { title: "Docker Compose", duration: "10:00", type: "video" }
+                    {
+                        title: "Introduction aux conteneurs",
+                        duration: "12:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    },
+                    {
+                        title: "Écrire un Dockerfile",
+                        duration: "15:00",
+                        type: "text",
+                        content: "# Le Dockerfile\n\nUn Dockerfile est un script contenant une succession de commandes..."
+                    },
+                    {
+                        title: "Docker Compose",
+                        duration: "10:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    }
                 ]
             },
             {
                 title: "Kubernetes pour les développeurs",
                 lessons: [
-                    { title: "Architecture de K8s", duration: "25:00", type: "video" },
-                    { title: "Déploiement de Pods et Services", duration: "20:00", type: "text" },
-                    { title: "Quiz : Docker & K8s", duration: "10:00", type: "quiz" }
+                    {
+                        title: "Architecture de K8s",
+                        duration: "25:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    },
+                    {
+                        title: "Déploiement de Pods et Services",
+                        duration: "20:00",
+                        type: "text",
+                        content: "# Kubernetes Pods & Services\n\nLes Pods sont les plus petites unités déployables..."
+                    },
+                    {
+                        title: "Quiz : Docker & K8s",
+                        duration: "10:00",
+                        type: "quiz",
+                        questions: [
+                            { question: "Que signifie K8s ?", options: ["Kubernetes", "Kernel", "Kibana", "Keynote"], correctAnswer: 0 },
+                            { question: "Quelle commande lance un conteneur ?", options: ["docker run", "docker start", "docker go", "docker up"], correctAnswer: 0 }
+                        ]
+                    }
                 ]
             },
             {
                 title: "Certification",
                 lessons: [
-                    { title: "Projet : Pipeline CI/CD complet", duration: "50:00", type: "video" },
-                    { title: "Examen final DevOps", duration: "40:00", type: "quiz" },
-                    { title: "Votre certificat DevOps", duration: "01:00", type: "text" }
+                    {
+                        title: "Projet : Pipeline CI/CD complet",
+                        duration: "50:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                    },
+                    {
+                        title: "Examen final DevOps",
+                        duration: "40:00",
+                        type: "quiz",
+                        questions: [
+                            { question: "Quel outil est utilisé pour le CI/CD ?", options: ["Jenkins", "Word", "Excel", "Paint"], correctAnswer: 0 }
+                        ]
+                    },
+                    {
+                        title: "Votre certificat DevOps",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
@@ -164,25 +337,25 @@ export const courses: Course[] = [
             {
                 title: "Fondamentaux de l'IA",
                 lessons: [
-                    { title: "Qu'est-ce que l'IA ?", duration: "08:00", type: "video" },
-                    { title: "Histoire et évolution", duration: "10:00", type: "text" },
-                    { title: "Quiz : Concepts de base", duration: "05:00", type: "quiz" }
+                    { title: "Qu'est-ce que l'IA ?", duration: "08:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Histoire et évolution", duration: "10:00", type: "text", content: "# Histoire de l'IA\n\nL'IA a commencé dans les années 50..." },
+                    { title: "Quiz : Concepts de base", duration: "05:00", type: "quiz", questions: [{ question: "Qui est le père de l'IA ?", options: ["Alan Turing", "Steve Jobs", "Bill Gates"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "Machine Learning Pratique",
                 lessons: [
-                    { title: "Apprentissage supervisé vs non-supervisé", duration: "15:00", type: "video" },
-                    { title: "Votre premier modèle avec Scikit-Learn", duration: "20:00", type: "text" },
-                    { title: "Validation du modèle", duration: "10:00", type: "quiz" }
+                    { title: "Apprentissage supervisé vs non-supervisé", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Votre premier modèle avec Scikit-Learn", duration: "20:00", type: "text", content: "# Scikit-Learn\n\nUne librairie puissante pour le ML..." },
+                    { title: "Validation du modèle", duration: "10:00", type: "quiz", questions: [{ question: "Quelle métrique pour la classification ?", options: ["Accuracy", "MSE", "R2"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "Conclusion & Certificat",
                 lessons: [
-                    { title: "L'éthique dans l'IA", duration: "12:00", type: "video" },
-                    { title: "Examen final IA", duration: "20:00", type: "quiz" },
-                    { title: "Certificat de réussite", duration: "01:00", type: "text" }
+                    { title: "L'éthique dans l'IA", duration: "12:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Examen final IA", duration: "20:00", type: "quiz", questions: [{ question: "Le biais est-il un problème ?", options: ["Oui", "Non"], correctAnswer: 0 }] },
+                    { title: "Certificat de réussite", duration: "01:00", type: "text", content: "CERTIFICAT" }
                 ]
             }
         ]
@@ -212,25 +385,25 @@ export const courses: Course[] = [
             {
                 title: "Bases de l'animation",
                 lessons: [
-                    { title: "Introduction à Framer Motion", duration: "10:00", type: "video" },
-                    { title: "Propriétés d'animation", duration: "15:00", type: "text" },
-                    { title: "Quiz : Principes d'animation", duration: "05:00", type: "quiz" }
+                    { title: "Introduction à Framer Motion", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Propriétés d'animation", duration: "15:00", type: "text", content: "# Framer Motion\n\nLibrary d'animation pour React..." },
+                    { title: "Quiz : Principes d'animation", duration: "05:00", type: "quiz", questions: [{ question: "Quelle prop pour animer ?", options: ["animate", "move", "run"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "Animations Complexes",
                 lessons: [
-                    { title: "Layout Animations", duration: "18:00", type: "video" },
-                    { title: "Gestures & Drag", duration: "20:00", type: "text" },
-                    { title: "Scroll Animations", duration: "15:00", type: "video" }
+                    { title: "Layout Animations", duration: "18:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Gestures & Drag", duration: "20:00", type: "text", content: "# Gestures\n\nDrag, hover, tap..." },
+                    { title: "Scroll Animations", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
                 ]
             },
             {
                 title: "Projet & Certificat",
                 lessons: [
-                    { title: "Création d'un portfolio animé", duration: "30:00", type: "video" },
-                    { title: "Examen final Animation", duration: "15:00", type: "quiz" },
-                    { title: "Certificat", duration: "01:00", type: "text" }
+                    { title: "Création d'un portfolio animé", duration: "30:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Examen final Animation", duration: "15:00", type: "quiz", questions: [{ question: "LayoutId sert à ?", options: ["Shared Element Transition", "Rien", "Debug"], correctAnswer: 0 }] },
+                    { title: "Certificat", duration: "01:00", type: "text", content: "CERTIFICAT" }
                 ]
             }
         ]
@@ -260,25 +433,25 @@ export const courses: Course[] = [
             {
                 title: "Les bases de TypeScript",
                 lessons: [
-                    { title: "Pourquoi TypeScript ?", duration: "08:00", type: "video" },
-                    { title: "Types primitifs et interfaces", duration: "12:00", type: "text" },
-                    { title: "Quiz : Typage statique", duration: "05:00", type: "quiz" }
+                    { title: "Pourquoi TypeScript ?", duration: "08:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Types primitifs et interfaces", duration: "12:00", type: "text", content: "# TypeScript Types\n\nString, Number, Boolean..." },
+                    { title: "Quiz : Typage statique", duration: "05:00", type: "quiz", questions: [{ question: "Extension de fichier TS ?", options: [".ts", ".js", ".jsx"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "TypeScript Avancé",
                 lessons: [
-                    { title: "Generics et Utility Types", duration: "20:00", type: "video" },
-                    { title: "Type Narrowing & Guards", duration: "15:00", type: "text" },
-                    { title: "Decorators", duration: "10:00", type: "video" }
+                    { title: "Generics et Utility Types", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Type Narrowing & Guards", duration: "15:00", type: "text", content: "# Generics\n\n<T>..." },
+                    { title: "Decorators", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
                 ]
             },
             {
                 title: "Certification",
                 lessons: [
-                    { title: "Projet : Librairie typée", duration: "35:00", type: "video" },
-                    { title: "Examen final TypeScript", duration: "25:00", type: "quiz" },
-                    { title: "Certificat de réussite", duration: "01:00", type: "text" }
+                    { title: "Projet : Librairie typée", duration: "35:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Examen final TypeScript", duration: "25:00", type: "quiz", questions: [{ question: "Partial<T> rend tout optionnel ?", options: ["Oui", "Non"], correctAnswer: 0 }] },
+                    { title: "Certificat de réussite", duration: "01:00", type: "text", content: "CERTIFICAT" }
                 ]
             }
         ]
@@ -308,25 +481,25 @@ export const courses: Course[] = [
             {
                 title: "Python Essentials",
                 lessons: [
-                    { title: "Rappels Python", duration: "10:00", type: "video" },
-                    { title: "Environnement Jupyter", duration: "10:00", type: "text" },
-                    { title: "Quiz : Python", duration: "05:00", type: "quiz" }
+                    { title: "Rappels Python", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Environnement Jupyter", duration: "10:00", type: "text", content: "# Jupyter\n\nNotebooks interactifs..." },
+                    { title: "Quiz : Python", duration: "05:00", type: "quiz", questions: [{ question: "print('hello') affiche ?", options: ["hello", "print", "error"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "Analyse de données",
                 lessons: [
-                    { title: "NumPy Arrays", duration: "15:00", type: "video" },
-                    { title: "Pandas DataFrames", duration: "25:00", type: "text" },
-                    { title: "Visualisation de données", duration: "20:00", type: "video" }
+                    { title: "NumPy Arrays", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Pandas DataFrames", duration: "25:00", type: "text", content: "# Pandas\n\nManipulation de données..." },
+                    { title: "Visualisation de données", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
                 ]
             },
             {
                 title: "Projet Data & Certificat",
                 lessons: [
-                    { title: "Projet : Analyse exploratoire", duration: "45:00", type: "video" },
-                    { title: "Examen Data Science", duration: "30:00", type: "quiz" },
-                    { title: "Certificat", duration: "01:00", type: "text" }
+                    { title: "Projet : Analyse exploratoire", duration: "45:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Examen Data Science", duration: "30:00", type: "quiz", questions: [{ question: "Pandas sert à ?", options: ["Data Analysis", "Web Dev", "Game Dev"], correctAnswer: 0 }] },
+                    { title: "Certificat", duration: "01:00", type: "text", content: "CERTIFICAT" }
                 ]
             }
         ]
@@ -356,25 +529,25 @@ export const courses: Course[] = [
             {
                 title: "Introduction à la sécurité",
                 lessons: [
-                    { title: "Les piliers de la sécurité (CIA)", duration: "10:00", type: "video" },
-                    { title: "Types de hackers", duration: "08:00", type: "text" },
-                    { title: "Quiz : Bases sécu", duration: "05:00", type: "quiz" }
+                    { title: "Les piliers de la sécurité (CIA)", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Types de hackers", duration: "08:00", type: "text", content: "# CIA Triad\n\nConfidentiality, Integrity, Availability..." },
+                    { title: "Quiz : Bases sécu", duration: "05:00", type: "quiz", questions: [{ question: "Que signifie CIA ?", options: ["Confidentiality Integrity Availability", "Central Intelligence Agency"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "Attaques Web",
                 lessons: [
-                    { title: "Injections SQL", duration: "20:00", type: "video" },
-                    { title: "XSS & CSRF", duration: "25:00", type: "text" },
-                    { title: "Défense en profondeur", duration: "15:00", type: "video" }
+                    { title: "Injections SQL", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "XSS & CSRF", duration: "25:00", type: "text", content: "# OWASP Top 10\n\nLes failles les plus courantes..." },
+                    { title: "Défense en profondeur", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
                 ]
             },
             {
                 title: "Audit & Certificat",
                 lessons: [
-                    { title: "Outils de pentest", duration: "30:00", type: "video" },
-                    { title: "Examen Cybersécurité", duration: "35:00", type: "quiz" },
-                    { title: "Certificat de réussite", duration: "01:00", type: "text" }
+                    { title: "Outils de pentest", duration: "30:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Examen Cybersécurité", duration: "35:00", type: "quiz", questions: [{ question: "SQL Injection cible ?", options: ["Base de données", "Navigateur", "Serveur"], correctAnswer: 0 }] },
+                    { title: "Certificat de réussite", duration: "01:00", type: "text", content: "CERTIFICAT" }
                 ]
             }
         ]
@@ -404,25 +577,25 @@ export const courses: Course[] = [
             {
                 title: "Démarrer avec React Native",
                 lessons: [
-                    { title: "React Native vs Web", duration: "10:00", type: "video" },
-                    { title: "Installation d'Expo", duration: "15:00", type: "text" },
-                    { title: "Premier écran", duration: "12:00", type: "video" }
+                    { title: "React Native vs Web", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Installation d'Expo", duration: "15:00", type: "text", content: "# Expo\n\nFramework pour React Native..." },
+                    { title: "Premier écran", duration: "12:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
                 ]
             },
             {
                 title: "Composants & Navigation",
                 lessons: [
-                    { title: "Composants natifs (View, Text...)", duration: "20:00", type: "video" },
-                    { title: "React Navigation", duration: "25:00", type: "text" },
-                    { title: "Quiz : Mobile Dev", duration: "10:00", type: "quiz" }
+                    { title: "Composants natifs (View, Text...)", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "React Navigation", duration: "25:00", type: "text", content: "# Navigation\n\nStack, Tab, Drawer..." },
+                    { title: "Quiz : Mobile Dev", duration: "10:00", type: "quiz", questions: [{ question: "Equivalent de div ?", options: ["View", "Div", "Box"], correctAnswer: 0 }] }
                 ]
             },
             {
                 title: "Publication & Certificat",
                 lessons: [
-                    { title: "Build & Deploy", duration: "30:00", type: "video" },
-                    { title: "Examen final Mobile", duration: "20:00", type: "quiz" },
-                    { title: "Certificat", duration: "01:00", type: "text" }
+                    { title: "Build & Deploy", duration: "30:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
+                    { title: "Examen final Mobile", duration: "20:00", type: "quiz", questions: [{ question: "EAS Build sert à ?", options: ["Build dans le cloud", "Rien", "Test"], correctAnswer: 0 }] },
+                    { title: "Certificat", duration: "01:00", type: "text", content: "CERTIFICAT" }
                 ]
             }
         ]

@@ -104,10 +104,10 @@ export default function CoursePage({ params }: CoursePageProps) {
 
                   <div className="space-y-4">
                     <Link
-                      href="/register"
+                      href={`/courses/${slug}/learn`}
                       className={cn(buttonVariants({ size: "lg" }), "w-full h-14 text-lg font-bold shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 transition-all hover:-translate-y-0.5")}
                     >
-                      S'inscrire gratuitement
+                      Commencer la formation
                     </Link>
                     <p className="text-xs text-center text-muted-foreground font-medium">
                       Accès immédiat et illimité après inscription
@@ -157,10 +157,10 @@ export default function CoursePage({ params }: CoursePageProps) {
               <Badge variant="outline">Accès libre</Badge>
             </div>
             <Link
-              href="/register"
+              href={`/courses/${slug}/learn`}
               className={cn(buttonVariants({ size: "lg" }), "w-full h-12 text-base font-bold")}
             >
-              S'inscrire gratuitement
+              Commencer la formation
             </Link>
           </div>
 
