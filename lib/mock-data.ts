@@ -783,7 +783,7 @@ Correspond à :
         price: 0,
         rating: 4.9,
         reviewsCount: 89,
-        lessonsCount: 65,
+        lessonsCount: 14,
         duration: "20h",
         slug: "devops-zero-hero",
         lastUpdated: "Octobre 2024",
@@ -800,21 +800,246 @@ Correspond à :
                 lessons: [
                     {
                         title: "Introduction aux conteneurs",
-                        duration: "12:00",
+                        duration: "16:30",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                        videoUrl: "https://www.youtube.com/embed/gAkwW2tuIqE"
+                    },
+                    {
+                        title: "Installation de Docker",
+                        duration: "12:20",
+                        type: "text",
+                        content: `# Installation de Docker
+
+## Windows
+
+1. Téléchargez **Docker Desktop** depuis le site officiel
+2. Exécutez l'installateur
+3. Redémarrez votre ordinateur
+4. Vérifiez l'installation :
+
+\`\`\`bash
+docker --version
+docker run hello-world
+\`\`\`
+
+## macOS
+
+\`\`\`bash
+# Avec Homebrew
+brew install --cask docker
+
+# Ou téléchargez Docker Desktop
+\`\`\`
+
+## Linux (Ubuntu/Debian)
+
+\`\`\`bash
+# Mise à jour des paquets
+sudo apt-get update
+
+# Installation des dépendances
+sudo apt-get install ca-certificates curl gnupg
+
+# Ajout de la clé GPG officielle de Docker
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Configuration du repository
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Installation de Docker
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+# Vérification
+sudo docker run hello-world
+\`\`\`
+
+## Commandes de base
+
+\`\`\`bash
+# Vérifier la version
+docker --version
+
+# Informations système
+docker info
+
+# Lister les conteneurs en cours
+docker ps
+
+# Lister tous les conteneurs
+docker ps -a
+
+# Lister les images
+docker images
+\`\`\``
                     },
                     {
                         title: "Écrire un Dockerfile",
-                        duration: "15:00",
+                        duration: "22:45",
                         type: "text",
-                        content: "# Le Dockerfile\n\nUn Dockerfile est un script contenant une succession de commandes..."
+                        content: `# Maîtriser les Dockerfiles
+
+## Qu'est-ce qu'un Dockerfile ?
+
+Un **Dockerfile** est un fichier texte contenant les instructions pour construire une image Docker.
+
+## Exemple : Application Node.js
+
+\`\`\`dockerfile
+# Image de base
+FROM node:18-alpine
+
+# Métadonnées
+LABEL maintainer="dev@example.com"
+LABEL version="1.0"
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier les fichiers de dépendances
+COPY package*.json ./
+
+# Installer les dépendances
+RUN npm ci --only=production
+
+# Copier le code source
+COPY . .
+
+# Exposer le port
+EXPOSE 3000
+
+# Commande de démarrage
+CMD ["npm", "start"]
+\`\`\`
+
+## Instructions principales
+
+### FROM
+Définit l'image de base :
+\`\`\`dockerfile
+FROM ubuntu:22.04
+FROM node:18-alpine
+FROM python:3.11-slim
+\`\`\`
+
+### WORKDIR
+Définit le répertoire de travail :
+\`\`\`dockerfile
+WORKDIR /app
+\`\`\`
+
+### COPY vs ADD
+\`\`\`dockerfile
+# COPY : Simple copie de fichiers
+COPY package.json .
+COPY src/ ./src/
+
+# ADD : Copie + extraction d'archives
+ADD archive.tar.gz /app/
+\`\`\`
+
+### RUN
+Exécute des commandes lors du build :
+\`\`\`dockerfile
+RUN apt-get update && apt-get install -y curl git
+\`\`\`
+
+### ENV
+Définit des variables d'environnement :
+\`\`\`dockerfile
+ENV NODE_ENV=production
+ENV PORT=3000
+\`\`\`
+
+### EXPOSE
+Documente les ports utilisés :
+\`\`\`dockerfile
+EXPOSE 3000
+EXPOSE 8080
+\`\`\`
+
+### CMD vs ENTRYPOINT
+
+**CMD** : Commande par défaut (peut être overridée)
+\`\`\`dockerfile
+CMD ["npm", "start"]
+\`\`\`
+
+**ENTRYPOINT** : Point d'entrée fixe
+\`\`\`dockerfile
+ENTRYPOINT ["node"]
+CMD ["server.js"]
+\`\`\`
+
+## Multi-stage builds
+
+Optimisez la taille de vos images :
+
+\`\`\`dockerfile
+# Stage 1: Build
+FROM node:18 AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage 2: Production
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY package*.json ./
+RUN npm ci --only=production
+CMD ["node", "dist/server.js"]
+\`\`\`
+
+## Bonnes pratiques
+
+1. ✅ Utilisez des images de base légères (alpine)
+2. ✅ Minimisez le nombre de layers
+3. ✅ Utilisez .dockerignore
+4. ✅ Ne stockez jamais de secrets dans l'image
+5. ✅ Utilisez multi-stage builds
+6. ✅ Spécifiez des versions précises`
                     },
                     {
-                        title: "Docker Compose",
-                        duration: "10:00",
+                        title: "Docker Compose en pratique",
+                        duration: "24:40",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                        videoUrl: "https://www.youtube.com/embed/DM65_JyGxCo"
+                    },
+                    {
+                        title: "Quiz : Docker",
+                        duration: "10:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle instruction Dockerfile copie des fichiers ?",
+                                options: ["COPY", "ADD", "Les deux", "MOVE"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "Quelle commande lance un conteneur Docker ?",
+                                options: ["docker start", "docker run", "docker exec", "docker create"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "À quoi sert docker-compose ?",
+                                options: ["Créer des images", "Gérer des applications multi-conteneurs", "Monitorer les conteneurs", "Sauvegarder des données"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle est la différence entre CMD et ENTRYPOINT ?",
+                                options: ["Aucune", "CMD peut être overridé, ENTRYPOINT est fixe", "ENTRYPOINT est obsolète", "CMD est plus rapide"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Que fait un multi-stage build ?",
+                                options: ["Accélère le build", "Réduit la taille de l'image finale", "Permet plusieurs CMD", "Crée plusieurs images"],
+                                correctAnswer: 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -822,24 +1047,174 @@ Correspond à :
                 title: "Kubernetes pour les développeurs",
                 lessons: [
                     {
-                        title: "Architecture de K8s",
-                        duration: "25:00",
+                        title: "Architecture Kubernetes",
+                        duration: "22:30",
                         type: "video",
-                        videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs"
+                        videoUrl: "https://www.youtube.com/embed/X48VuDVv0do"
                     },
                     {
-                        title: "Déploiement de Pods et Services",
-                        duration: "20:00",
+                        title: "Pods, Deployments et Services",
+                        duration: "28:15",
                         type: "text",
-                        content: "# Kubernetes Pods & Services\n\nLes Pods sont les plus petites unités déployables..."
+                        content: `# Kubernetes : Concepts Fondamentaux
+
+## Architecture Kubernetes
+
+### Composants du Control Plane
+
+- **API Server** : Point d'entrée pour toutes les commandes
+- **etcd** : Base de données clé-valeur pour l'état du cluster
+- **Scheduler** : Assigne les Pods aux Nodes
+- **Controller Manager** : Gère les contrôleurs
+
+### Composants des Nodes
+
+- **kubelet** : Agent qui s'exécute sur chaque node
+- **kube-proxy** : Gère le réseau
+- **Container Runtime** : Docker, containerd, etc.
+
+## Pods
+
+Le **Pod** est la plus petite unité déployable dans Kubernetes.
+
+\`\`\`yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.21
+    ports:
+    - containerPort: 80
+\`\`\`
+
+## Deployments
+
+Les **Deployments** gèrent les Pods et leur réplication.
+
+\`\`\`yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+\`\`\`
+
+## Services
+
+Les **Services** exposent les Pods au réseau.
+
+### ClusterIP (par défaut)
+
+\`\`\`yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+\`\`\`
+
+### NodePort
+
+\`\`\`yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport
+spec:
+  type: NodePort
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+\`\`\`
+
+## Commandes kubectl essentielles
+
+\`\`\`bash
+# Créer des ressources
+kubectl apply -f deployment.yaml
+
+# Lister les ressources
+kubectl get pods
+kubectl get deployments
+kubectl get services
+
+# Détails d'une ressource
+kubectl describe pod nginx-pod
+
+# Logs
+kubectl logs nginx-pod
+
+# Exécuter une commande
+kubectl exec -it nginx-pod -- /bin/bash
+
+# Scaler un deployment
+kubectl scale deployment nginx-deployment --replicas=5
+\`\`\``
                     },
                     {
-                        title: "Quiz : Docker & K8s",
+                        title: "Déploiement d'une application complète",
+                        duration: "28:50",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/s_o8dwzRlu4"
+                    },
+                    {
+                        title: "Quiz : Kubernetes",
                         duration: "10:00",
                         type: "quiz",
                         questions: [
-                            { question: "Que signifie K8s ?", options: ["Kubernetes", "Kernel", "Kibana", "Keynote"], correctAnswer: 0 },
-                            { question: "Quelle commande lance un conteneur ?", options: ["docker run", "docker start", "docker go", "docker up"], correctAnswer: 0 }
+                            {
+                                question: "Quelle est la plus petite unité déployable dans Kubernetes ?",
+                                options: ["Container", "Pod", "Deployment", "Service"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Que signifie K8s ?",
+                                options: ["Kubernetes (8 lettres entre K et s)", "Kernel 8 systems", "Kube 8 services", "Rien"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quel type de Service expose l'application à l'extérieur du cluster ?",
+                                options: ["ClusterIP", "NodePort", "LoadBalancer", "NodePort et LoadBalancer"],
+                                correctAnswer: 3
+                            },
+                            {
+                                question: "À quoi sert un ConfigMap ?",
+                                options: ["Stocker des secrets", "Stocker des configurations non sensibles", "Gérer les volumes", "Monitorer"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle commande permet de scaler un deployment ?",
+                                options: ["kubectl scale", "kubectl resize", "kubectl expand", "kubectl grow"],
+                                correctAnswer: 0
+                            }
                         ]
                     }
                 ]
