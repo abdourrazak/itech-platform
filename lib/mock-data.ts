@@ -2406,7 +2406,7 @@ function isFish(pet: Fish | Bird): pet is Fish {
         price: 0,
         rating: 4.7,
         reviewsCount: 98,
-        lessonsCount: 48,
+        lessonsCount: 9,
         duration: "15h",
         slug: "python-data-science",
         lastUpdated: "Juillet 2024",
@@ -2421,25 +2421,206 @@ function isFish(pet: Fish | Bird): pet is Fish {
             {
                 title: "Python Essentials",
                 lessons: [
-                    { title: "Rappels Python", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Environnement Jupyter", duration: "10:00", type: "text", content: "# Jupyter\n\nNotebooks interactifs..." },
-                    { title: "Quiz : Python", duration: "05:00", type: "quiz", questions: [{ question: "print('hello') affiche ?", options: ["hello", "print", "error"], correctAnswer: 0 }] }
+                    {
+                        title: "Environnement de Data Science",
+                        duration: "12:30",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/HW29067qVWk"
+                    },
+                    {
+                        title: "Jupyter Notebooks & Anaconda",
+                        duration: "15:00",
+                        type: "text",
+                        content: `# Environnement Data Science
+
+## Anaconda Distribution
+
+Anaconda est la distribution Python la plus populaire pour la Data Science. Elle inclut :
+- Python
+- Jupyter Notebook / Lab
+- Les librairies essentielles (NumPy, Pandas, Matplotlib...)
+- Conda (gestionnaire de paquets)
+
+### Installation
+Téléchargez l'installateur sur [anaconda.com](https://www.anaconda.com)
+
+## Jupyter Notebooks
+
+Un environnement interactif qui combine code, texte, et visualisations.
+
+### Raccourcis clavier essentiels
+- **Shift + Enter** : Exécuter la cellule
+- **A** : Insérer une cellule au-dessus
+- **B** : Insérer une cellule en-dessous
+- **M** : Convertir en Markdown
+- **Y** : Convertir en Code
+- **D, D** : Supprimer la cellule
+
+## Conda Cheat Sheet
+
+\`\`\`bash
+# Créer un environnement
+conda create --name myenv python=3.9
+
+# Activer l'environnement
+conda activate myenv
+
+# Installer des paquets
+conda install numpy pandas
+
+# Lister les environnements
+conda env list
+\`\`\``
+                    },
+                    {
+                        title: "Quiz : Environnement",
+                        duration: "05:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quel est l'avantage principal de Jupyter ?",
+                                options: ["Vitesse d'exécution", "Interactivité et visualisation", "Compilation", "Sécurité"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel raccourci exécute une cellule ?",
+                                options: ["Ctrl + C", "Shift + Enter", "Alt + F4", "Esc"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "À quoi sert Conda ?",
+                                options: ["Éditeur de texte", "Gestionnaire de paquets et d'environnements", "Base de données", "Serveur web"],
+                                correctAnswer: 1
+                            }
+                        ]
+                    }
                 ]
             },
             {
-                title: "Analyse de données",
+                title: "Analyse de données avec Pandas",
                 lessons: [
-                    { title: "NumPy Arrays", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Pandas DataFrames", duration: "25:00", type: "text", content: "# Pandas\n\nManipulation de données..." },
-                    { title: "Visualisation de données", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
+                    {
+                        title: "Manipulation de DataFrames",
+                        duration: "25:40",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/vmEHCJofslg"
+                    },
+                    {
+                        title: "Nettoyage et Préparation",
+                        duration: "20:00",
+                        type: "text",
+                        content: `# Nettoyage de Données avec Pandas
+
+Le nettoyage (Data Cleaning) représente 80% du travail d'un Data Scientist.
+
+## Gestion des valeurs manquantes
+
+\`\`\`python
+import pandas as pd
+import numpy as np
+
+# Détecter les valeurs manquantes
+df.isnull().sum()
+
+# Supprimer les lignes avec des valeurs manquantes
+df.dropna()
+
+# Remplacer par la moyenne
+mean_age = df['age'].mean()
+df['age'].fillna(mean_age, inplace=True)
+\`\`\`
+
+## Filtrage et Sélection
+
+\`\`\`python
+# Sélectionner une colonne
+ages = df['age']
+
+# Filtrer par condition
+adults = df[df['age'] >= 18]
+
+# Conditions multiples
+senior_devs = df[(df['age'] > 40) & (df['role'] == 'Developer')]
+\`\`\`
+
+## GroupBy et Agrégation
+
+\`\`\`python
+# Salaire moyen par département
+df.groupby('department')['salary'].mean()
+
+# Statistiques multiples
+df.groupby('department').agg({
+    'salary': ['mean', 'min', 'max'],
+    'age': 'median'
+})
+\`\`\`
+
+## Fusion de données
+
+\`\`\`python
+# Concaténation
+pd.concat([df1, df2])
+
+# Merge (comme SQL JOIN)
+pd.merge(users, orders, on='user_id', how='left')
+\`\`\``
+                    },
+                    {
+                        title: "Visualisation avec Matplotlib & Seaborn",
+                        duration: "22:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/6GUZXDef2U0"
+                    }
                 ]
             },
             {
                 title: "Projet Data & Certificat",
                 lessons: [
-                    { title: "Projet : Analyse exploratoire", duration: "45:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Examen Data Science", duration: "30:00", type: "quiz", questions: [{ question: "Pandas sert à ?", options: ["Data Analysis", "Web Dev", "Game Dev"], correctAnswer: 0 }] },
-                    { title: "Certificat", duration: "01:00", type: "text", content: "CERTIFICAT" }
+                    {
+                        title: "Projet : Analyse du Titanic",
+                        duration: "45:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/I3FBJdiExcg"
+                    },
+                    {
+                        title: "Examen Data Science",
+                        duration: "30:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle méthode supprime les valeurs manquantes ?",
+                                options: ["dropna()", "fillna()", "remove()", "delete()"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Quelle librairie est basée sur Matplotlib mais plus esthétique ?",
+                                options: ["NumPy", "Seaborn", "Pandas", "Scikit-learn"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Comment grouper des données ?",
+                                options: ["sort_values()", "groupby()", "pivot()", "cluster()"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quelle commande installe un paquet avec Conda ?",
+                                options: ["pip install", "npm install", "conda install", "apt-get install"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "Quel est le type principal de données dans Pandas ?",
+                                options: ["List", "Dictionary", "DataFrame", "Array"],
+                                correctAnswer: 2
+                            }
+                        ]
+                    },
+                    {
+                        title: "Certificat de réussite",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
