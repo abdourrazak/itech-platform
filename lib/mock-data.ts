@@ -2635,7 +2635,7 @@ pd.merge(users, orders, on='user_id', how='left')
         price: 0,
         rating: 4.9,
         reviewsCount: 75,
-        lessonsCount: 52,
+        lessonsCount: 9,
         duration: "18h",
         slug: "cybersecurity-fundamentals",
         lastUpdated: "Novembre 2024",
@@ -2650,25 +2650,166 @@ pd.merge(users, orders, on='user_id', how='left')
             {
                 title: "Introduction à la sécurité",
                 lessons: [
-                    { title: "Les piliers de la sécurité (CIA)", duration: "10:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Types de hackers", duration: "08:00", type: "text", content: "# CIA Triad\n\nConfidentiality, Integrity, Availability..." },
-                    { title: "Quiz : Bases sécu", duration: "05:00", type: "quiz", questions: [{ question: "Que signifie CIA ?", options: ["Confidentiality Integrity Availability", "Central Intelligence Agency"], correctAnswer: 0 }] }
+                    {
+                        title: "Les piliers de la sécurité (CIA)",
+                        duration: "12:15",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/Y7zNlEMDmI4"
+                    },
+                    {
+                        title: "Types de hackers et menaces",
+                        duration: "15:00",
+                        type: "text",
+                        content: `# Fondamentaux de la Cybersécurité
+
+## La Triade CIA
+
+1. **Confidentialité** : Seules les personnes autorisées ont accès aux données.
+2. **Intégrité** : Les données ne sont pas altérées.
+3. **Disponibilité** : Les systèmes sont accessibles quand nécessaire.
+
+## Types de Hackers
+
+### White Hat (Éthiques)
+Travaillent pour sécuriser les systèmes, avec autorisation.
+
+### Black Hat (Malveillants)
+Exploitent les failles pour le profit ou la destruction.
+
+### Grey Hat
+Entre les deux, cherchent des failles sans autorisation mais pas forcément malveillants.
+
+## Vecteurs d'attaque courants
+
+- **Phishing** : Tromperie par email
+- **Malware** : Logiciels malveillants (Ransomware, Spyware)
+- **Social Engineering** : Manipulation psychologique
+- **DDoS** : Déni de service distribué
+\`\`\``
+                    },
+                    {
+                        title: "Quiz : Bases de la sécurité",
+                        duration: "05:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Que signifie le 'A' dans CIA ?",
+                                options: ["Authorization", "Authentication", "Availability", "Audit"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "Quel type de hacker est éthique ?",
+                                options: ["Black Hat", "White Hat", "Grey Hat", "Red Hat"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Qu'est-ce que le Phishing ?",
+                                options: ["Un virus", "Une attaque réseau", "Une tromperie par email", "Un bug"],
+                                correctAnswer: 2
+                            }
+                        ]
+                    }
                 ]
             },
             {
-                title: "Attaques Web",
+                title: "Attaques Web (OWASP Top 10)",
                 lessons: [
-                    { title: "Injections SQL", duration: "20:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "XSS & CSRF", duration: "25:00", type: "text", content: "# OWASP Top 10\n\nLes failles les plus courantes..." },
-                    { title: "Défense en profondeur", duration: "15:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" }
+                    {
+                        title: "Injections SQL",
+                        duration: "18:30",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/_jKylhJtPmI"
+                    },
+                    {
+                        title: "XSS (Cross-Site Scripting)",
+                        duration: "22:00",
+                        type: "text",
+                        content: `# Cross-Site Scripting (XSS)
+
+Le XSS permet à un attaquant d'injecter du script malveillant dans une page web vue par d'autres utilisateurs.
+
+## Types de XSS
+
+### 1. Stored XSS (Persistant)
+Le script est stocké sur le serveur (ex: commentaire de blog).
+\`\`\`html
+<script>stealCookies()</script>
+\`\`\`
+
+### 2. Reflected XSS (Non-persistant)
+Le script est dans l'URL et exécuté immédiatement.
+\`\`\`
+http://site.com/search?q=<script>alert(1)</script>
+\`\`\`
+
+### 3. DOM-based XSS
+La vulnérabilité est dans le JavaScript côté client.
+
+## Prévention
+
+1. **Échapper les données** (Output Encoding)
+2. **Valider les entrées** (Input Validation)
+3. **Content Security Policy (CSP)**
+\`\`\`http
+Content-Security-Policy: default-src 'self';
+\`\`\`
+\`\`\``
+                    },
+                    {
+                        title: "CSRF & Authentification",
+                        duration: "16:45",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/eWEgUcHPLEc"
+                    }
                 ]
             },
             {
                 title: "Audit & Certificat",
                 lessons: [
-                    { title: "Outils de pentest", duration: "30:00", type: "video", videoUrl: "https://www.youtube.com/embed/Sklc_fQBmcs" },
-                    { title: "Examen Cybersécurité", duration: "35:00", type: "quiz", questions: [{ question: "SQL Injection cible ?", options: ["Base de données", "Navigateur", "Serveur"], correctAnswer: 0 }] },
-                    { title: "Certificat de réussite", duration: "01:00", type: "text", content: "CERTIFICAT" }
+                    {
+                        title: "Outils de Pentest (Kali Linux)",
+                        duration: "35:00",
+                        type: "video",
+                        videoUrl: "https://www.youtube.com/embed/3FNYvj2U0HM"
+                    },
+                    {
+                        title: "Examen Cybersécurité",
+                        duration: "30:00",
+                        type: "quiz",
+                        questions: [
+                            {
+                                question: "Quelle faille permet de voler des cookies ?",
+                                options: ["SQL Injection", "XSS", "DDoS", "Brute Force"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Que cible une injection SQL ?",
+                                options: ["Le navigateur", "La base de données", "Le serveur DNS", "Le pare-feu"],
+                                correctAnswer: 1
+                            },
+                            {
+                                question: "Quel outil est standard pour le pentest ?",
+                                options: ["Ubuntu", "Windows", "Kali Linux", "MacOS"],
+                                correctAnswer: 2
+                            },
+                            {
+                                question: "À quoi sert un CSP ?",
+                                options: ["Protéger contre XSS", "Chiffrer les données", "Accélérer le site", "Gérer les cookies"],
+                                correctAnswer: 0
+                            },
+                            {
+                                question: "Le CSRF exploite quoi ?",
+                                options: ["La confiance du site envers le navigateur", "La confiance de l'utilisateur envers le site", "Les failles SQL", "Les mots de passe faibles"],
+                                correctAnswer: 0
+                            }
+                        ]
+                    },
+                    {
+                        title: "Certificat de réussite",
+                        duration: "01:00",
+                        type: "text",
+                        content: "CERTIFICAT"
+                    }
                 ]
             }
         ]
