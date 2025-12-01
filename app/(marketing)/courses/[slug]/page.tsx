@@ -18,24 +18,33 @@ interface CoursePageProps {
 export default async function CoursePage({ params }: CoursePageProps) {
   const { slug } = await params
 
-  // Fetch course from database
-  const course = await db.course.findUnique({
-    where: { slug },
-    include: {
-      chapters: {
-        orderBy: { position: "asc" },
-      },
-      category: true,
-      instructor: true,
-    },
-  })
+  let course
+  let enrolled = false
 
-  if (!course) {
+  try {
+    // Fetch course from database
+    course = await db.course.findUnique({
+      where: { slug },
+      include: {
+        chapters: {
+          orderBy: { position: "asc" },
+        },
+        category: true,
+        instructor: true,
+      },
+    })
+
+    if (!course) {
+      notFound()
+    }
+
+    // Check enrollment status
+    const enrollmentResult = await isEnrolledInCourse(course.id)
+    enrolled = enrollmentResult.enrolled || false
+  } catch (error) {
+    console.error("[COURSE_PAGE_ERROR]", error)
     notFound()
   }
-
-  // Check enrollment status
-  const { enrolled } = await isEnrolledInCourse(course.id)
 
   const getIconForType = (type: string) => {
     switch (type) {
