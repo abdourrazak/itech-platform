@@ -1,9 +1,14 @@
-import { PrismaClient } from "@prisma/client"
+// Database connection disabled - using mock data instead
+// Uncomment when ready to use Prisma
 
-declare global {
-    var prisma: PrismaClient | undefined
-}
+// import { PrismaClient } from "@prisma/client"
 
-export const db = globalThis.prisma || new PrismaClient()
+// declare global {
+//   var prisma: PrismaClient | undefined
+// }
 
-if (process.env.NODE_ENV !== "production") globalThis.prisma = db
+// export const db = globalThis.prisma || new PrismaClient()
+
+// if (process.env.NODE_ENV !== "production") globalThis.prisma = db
+
+export const db = {} as any // Placeholder
